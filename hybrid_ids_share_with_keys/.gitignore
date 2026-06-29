@@ -1,13 +1,54 @@
+# ── Python ──────────────────────────────────────────────────
 .venv/
 __pycache__/
 *.pyc
+*.pyo
+*.pyd
+*.egg-info/
+dist/
+build/
+.eggs/
+
+# ── Environment & Secrets ────────────────────────────────────
 .env
-logs/
-outputs/
-uploads/
+*.env.local
+
+# ── Model files (too large for git — download separately) ───
 models/**/*.keras
 models/**/*.h5
 models/**/*.pkl
 models/**/*.joblib
+models/**/*.json
+models/**/*.bin
+models/**/*.pt
+models/**/*.onnx
+
+# ── Runtime output folders ───────────────────────────────────
+logs/
+outputs/
+uploads/
+
+# ── SOAR runtime data (generated at runtime) ─────────────────
+incident-response-&-intrusion-detection-agent/data/incidents/
+incident-response-&-intrusion-detection-agent/data/reports/
+incident-response-&-intrusion-detection-agent/data/tickets.jsonl
+incident-response-&-intrusion-detection-agent/data/blocklist.txt
+incident-response-&-intrusion-detection-agent/data/isolated_hosts.txt
+incident-response-&-intrusion-detection-agent/__pycache__/
+
+# ── Node / React ──────────────────────────────────────────────
 node_modules/
-dist/
+incident-response-&-intrusion-detection-agent/node_modules/
+incident-response-&-intrusion-detection-agent/dist/
+
+# ── CICFlowMeter (too large) ─────────────────────────────────
+cicflowmeter_custom/
+cicflowmeter_custom.zip
+hybrid_ids_share_with_keys.zip
+
+# ── OS / Editor ───────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+*.swp
+.idea/
+.vscode/
