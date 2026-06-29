@@ -461,22 +461,6 @@ $env:CICFLOWMETER_BIN="C:\Users\YourName\Desktop\IDS--GP\cicflowmeter_custom\bin
 
 ---
 
-## ⚠️ Security Notice
-
-This project may require API keys for AI-assisted investigation.
-
-Do not upload the following files to GitHub:
-
-```text
-.env
-*.key
-*.pem
-credentials.json
-```
-
-Use `.env.example` instead of committing real secrets.
-
----
 
 ## 📚 Dataset
 
@@ -495,7 +479,6 @@ It demonstrates how machine learning, anomaly detection, and incident response a
 
 ## 👨‍💻 Authors
 
-* Amin Ahmed
 * Ghazaly118
 
 ---
