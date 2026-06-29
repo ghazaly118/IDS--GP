@@ -1,0 +1,23 @@
+Zero-Day Patch Only
+===================
+Copy these files into your existing hybrid_ids_project folder.
+
+ADD NEW:
+- app/zero_day_detector.py
+- models/zero_day_autoencoder/README.md
+- ZERO_DAY_INTEGRATION.md
+
+REPLACE EXISTING:
+- app/inference.py
+- app/main.py
+- app/schemas.py
+- app/ir_agent.py
+- ui/streamlit_app.py
+
+Then add your real zero-day model files here:
+models/zero_day_autoencoder/
+  autoencoder_zero_day.keras
+  scaler.joblib
+  meta.json
+
+Do not create a new venv. Use your existing .venv.

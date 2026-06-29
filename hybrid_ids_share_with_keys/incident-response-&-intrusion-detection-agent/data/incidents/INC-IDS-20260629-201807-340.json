@@ -1,0 +1,955 @@
+{
+  "id": "INC-IDS-20260629-201807-340",
+  "timestamp": "2026-06-29T20:18:07.667019+00:00",
+  "source_ip": "1.1.1.1",
+  "target_ip": "192.168.67.129",
+  "target_host": "my-linux-machine",
+  "attack_type": "DOS_FLOOD (258 rows)",
+  "severity": "High",
+  "cvss": 8.0,
+  "status": "Mitigated",
+  "mitre": {
+    "id": "T1498.001",
+    "name": "Direct Network Flood",
+    "tactic": "Impact"
+  },
+  "traffic_stats": {
+    "packets": 0,
+    "bytes": 0,
+    "duration_ms": 4900000,
+    "protocol": "6",
+    "src_port": "40112",
+    "dst_port": "80",
+    "service": "http",
+    "flow_index": "-",
+    "label": "NeedManualLabel",
+    "reconstruction_error": null
+  },
+  "flow_metadata": {
+    "source_ip": "1.1.1.1",
+    "target_ip": "192.168.67.129",
+    "source_port": "40112",
+    "target_port": "80",
+    "protocol": "6",
+    "packets": 0,
+    "bytes": 0,
+    "duration_ms": 4900000,
+    "service": "http",
+    "label": "NeedManualLabel",
+    "flow_index": "-",
+    "reconstruction_error": null
+  },
+  "ids_analysis_result": {
+    "filename": "dos.pcap",
+    "generated_csv": "C:\\Users\\amoha\\OneDrive\\Desktop\\gp\\gp\\hybrid_ids_share_with_keys\\outputs\\dos.pcap_Flow.csv",
+    "flows_analyzed": 1520,
+    "attack_count": 301,
+    "benign_count": 1219,
+    "attack_rate": 19.8,
+    "official_binary_decision": "ATTACK ",
+    "binary_summary": {
+      "file": "dos.pcap_Flow.csv",
+      "flows": 1520,
+      "lstm_mean": 0.1416,
+      "lstm_atk_percent": 4.98,
+      "lstm_count": 15,
+      "xgb_mean": 0.6581,
+      "xgb_atk_percent": 85.53,
+      "xgb_count": 1300,
+      "ENSEMBLE": "ATTACK ",
+      "status": "OK",
+      "alert_tolerance": 0,
+      "seq_len": 20,
+      "stride": 5,
+      "xgb_threshold": 0.5391536951065063,
+      "lstm_threshold": 0.5,
+      "matched_features": 63,
+      "missing_features": 0,
+      "missing_feature_names": [],
+      "feature_coverage_percent": 100.0,
+      "duplicate_mapped_columns": [
+        "Total Fwd Packets",
+        "Total Backward Packets",
+        "Fwd Packets Length Total",
+        "Bwd Packets Length Total",
+        "Avg Packet Size",
+        "Avg Fwd Segment Size",
+        "Avg Bwd Segment Size",
+        "Init Fwd Win Bytes",
+        "Init Bwd Win Bytes",
+        "Fwd Act Data Packets",
+        "CWE Flag Count"
+      ],
+      "fuzzy_renamed_columns_count": 74,
+      "lstm_window_count": 301
+    },
+    "multiclass_summary": {
+      "file": "dos.pcap_Flow.csv",
+      "status": "ok",
+      "mode": "ENSEMBLE",
+      "Total_Flows": 1520,
+      "Effective_Predictions": 301,
+      "Matched_Features": 70,
+      "Missing_Features": 0,
+      "Feature_Coverage_%": 100.0,
+      "Avg_Confidence": 0.9959,
+      "Agreement_Rate_%": 66.45,
+      "Unknown_Rate_%": 0.0,
+      "Top_1_Attack": "DOS_FLOOD (258 rows)",
+      "Top_2_Attack": "WEBATTACK (43 rows)",
+      "Top_3_Attack": "-",
+      "Error": "",
+      "display_attack_type_summary": {
+        "DOS_FLOOD": 258,
+        "WEBATTACK": 43
+      },
+      "message": "Multiclass executed because the official binary decision was ATTACK."
+    },
+    "attack_type_summary": {
+      "DOS_FLOOD": 258,
+      "WEBATTACK": 43
+    },
+    "rule_result": {
+      "status": "ok",
+      "engine": "dpkt_pcap_rules",
+      "pcap_file": "dos.pcap",
+      "message": "Packet rules executed in parallel with the AI pipeline.",
+      "summary": {
+        "total_alerts": 24,
+        "packets_processed": 26700,
+        "processing_time_sec": 10.7,
+        "window_size_sec": 2.0,
+        "dos_threshold_per_ip": 50,
+        "dos_threshold_aggregated": 200,
+        "average_packet_rate": 391.58,
+        "attack_type_summary": {
+          "web_attack": 0,
+          "brute_force": 0,
+          "botnet": 0,
+          "dos": 16,
+          "port_scan": 8
+        },
+        "top_sources": [
+          {
+            "src": "1.1.1.1",
+            "count": 11
+          },
+          {
+            "src": "192.168.67.129",
+            "count": 6
+          }
+        ]
+      },
+      "sample_alerts": [
+        {
+          "type": "dos",
+          "source": "heuristic",
+          "msg": "Per-IP DoS burst detected",
+          "src": "1.1.1.1",
+          "dst": "192.168.67.129"
+        },
+        {
+          "type": "dos",
+          "source": "heuristic",
+          "msg": "Aggregated DoS burst detected",
+          "src": "1.1.1.1",
+          "dst": "192.168.67.129"
+        },
+        {
+          "type": "dos",
+          "source": "heuristic",
+          "msg": "Per-IP DoS burst detected",
+          "src": "1.1.1.1",
+          "dst": "192.168.67.129"
+        },
+        {
+          "type": "dos",
+          "source": "heuristic",
+          "msg": "Aggregated DoS burst detected",
+          "src": "1.1.1.1",
+          "dst": "192.168.67.129"
+        },
+        {
+          "type": "dos",
+          "source": "heuristic",
+          "msg": "Per-IP DoS burst detected",
+          "src": "1.1.1.1",
+          "dst": "192.168.67.129"
+        },
+        {
+          "type": "dos",
+          "source": "heuristic",
+          "msg": "Aggregated DoS burst detected",
+          "src": "1.1.1.1",
+          "dst": "192.168.67.129"
+        },
+        {
+          "type": "port_scan",
+          "source": "heuristic",
+          "msg": "Port scan behavior detected",
+          "src": "1.1.1.1",
+          "dst": "192.168.67.129"
+        },
+        {
+          "type": "dos",
+          "source": "heuristic",
+          "msg": "Per-IP DoS burst detected",
+          "src": "1.1.1.1",
+          "dst": "192.168.67.129"
+        },
+        {
+          "type": "dos",
+          "source": "heuristic",
+          "msg": "Aggregated DoS burst detected",
+          "src": "1.1.1.1",
+          "dst": "192.168.67.129"
+        },
+        {
+          "type": "port_scan",
+          "source": "heuristic",
+          "msg": "Port scan behavior detected",
+          "src": "1.1.1.1",
+          "dst": "192.168.67.129"
+        },
+        {
+          "type": "port_scan",
+          "source": "heuristic",
+          "msg": "Port scan behavior detected",
+          "src": "1.1.1.1",
+          "dst": "192.168.67.129"
+        },
+        {
+          "type": "dos",
+          "source": "heuristic",
+          "msg": "Per-IP DoS burst detected",
+          "src": "1.1.1.1",
+          "dst": "192.168.67.129"
+        },
+        {
+          "type": "port_scan",
+          "source": "heuristic",
+          "msg": "Port scan behavior detected",
+          "src": "192.168.67.129",
+          "dst": "1.1.1.1"
+        },
+        {
+          "type": "port_scan",
+          "source": "heuristic",
+          "msg": "Port scan behavior detected",
+          "src": "192.168.67.129",
+          "dst": "1.1.1.1"
+        },
+        {
+          "type": "dos",
+          "source": "heuristic",
+          "msg": "Aggregated DoS burst detected",
+          "src": "1.1.1.1",
+          "dst": "192.168.67.129"
+        },
+        {
+          "type": "dos",
+          "source": "heuristic",
+          "msg": "Aggregated DoS burst detected",
+          "src": "1.1.1.1",
+          "dst": "192.168.67.129"
+        },
+        {
+          "type": "dos",
+          "source": "heuristic",
+          "msg": "Per-IP DoS burst detected",
+          "src": "192.168.67.129",
+          "dst": "1.1.1.1"
+        },
+        {
+          "type": "dos",
+          "source": "heuristic",
+          "msg": "Per-IP DoS burst detected",
+          "src": "192.168.67.129",
+          "dst": "1.1.1.1"
+        },
+        {
+          "type": "port_scan",
+          "source": "heuristic",
+          "msg": "Port scan behavior detected",
+          "src": "1.1.1.1",
+          "dst": "192.168.67.129"
+        },
+        {
+          "type": "dos",
+          "source": "heuristic",
+          "msg": "Per-IP DoS burst detected",
+          "src": "1.1.1.1",
+          "dst": "192.168.67.129"
+        },
+        {
+          "type": "dos",
+          "source": "heuristic",
+          "msg": "Aggregated DoS burst detected",
+          "src": "192.168.67.129",
+          "dst": "1.1.1.1"
+        },
+        {
+          "type": "port_scan",
+          "source": "heuristic",
+          "msg": "Port scan behavior detected",
+          "src": "192.168.67.129",
+          "dst": "1.1.1.1"
+        },
+        {
+          "type": "dos",
+          "source": "heuristic",
+          "msg": "Per-IP DoS burst detected",
+          "src": "192.168.67.129",
+          "dst": "1.1.1.1"
+        },
+        {
+          "type": "port_scan",
+          "source": "heuristic",
+          "msg": "Port scan behavior detected",
+          "src": "1.1.1.1",
+          "dst": "192.168.67.129"
+        }
+      ]
+    },
+    "zero_day_summary": {
+      "file": "dos.pcap_Flow.csv",
+      "status": "skipped",
+      "model_type": "autoencoder",
+      "decision": "SKIPPED",
+      "message": "Zero-day detector skipped because the official binary decision was ATTACK. Autoencoder is only executed for files classified as BENIGN/SAFE by the binary model.",
+      "rows": 1520,
+      "threshold": null,
+      "mean_reconstruction_error": null,
+      "max_reconstruction_error": null,
+      "anomalous_rows": 0,
+      "normal_rows": 1520,
+      "anomaly_rate_percent": 0.0,
+      "feature_count": 0,
+      "matched_features": 0,
+      "missing_features": 0,
+      "feature_coverage_percent": 0.0,
+      "top_anomalous_rows": []
+    },
+    "zero_day_details": [],
+    "results_preview": [
+      {
+        "flow_index": 19,
+        "attack_type": "DOS_FLOOD",
+        "attack_type_confidence": 0.9998,
+        "attack_type_status": "DOS_FLOOD",
+        "xgb_pred": "DOS_FLOOD",
+        "xgb_conf": 0.9968,
+        "lstm_pred": "DOS_FLOOD",
+        "lstm_conf": 0.9998,
+        "ensemble_pred": "DOS_FLOOD",
+        "ensemble_conf": 0.9982,
+        "source_model": "ensemble"
+      },
+      {
+        "flow_index": 24,
+        "attack_type": "DOS_FLOOD",
+        "attack_type_confidence": 0.9998,
+        "attack_type_status": "DOS_FLOOD",
+        "xgb_pred": "DOS_FLOOD",
+        "xgb_conf": 0.9968,
+        "lstm_pred": "DOS_FLOOD",
+        "lstm_conf": 0.9998,
+        "ensemble_pred": "DOS_FLOOD",
+        "ensemble_conf": 0.9982,
+        "source_model": "ensemble"
+      },
+      {
+        "flow_index": 29,
+        "attack_type": "DOS_FLOOD",
+        "attack_type_confidence": 0.9998,
+        "attack_type_status": "DOS_FLOOD",
+        "xgb_pred": "DOS_FLOOD",
+        "xgb_conf": 0.9968,
+        "lstm_pred": "DOS_FLOOD",
+        "lstm_conf": 0.9998,
+        "ensemble_pred": "DOS_FLOOD",
+        "ensemble_conf": 0.9982,
+        "source_model": "ensemble"
+      },
+      {
+        "flow_index": 34,
+        "attack_type": "DOS_FLOOD",
+        "attack_type_confidence": 0.9998,
+        "attack_type_status": "DOS_FLOOD",
+        "xgb_pred": "DOS_FLOOD",
+        "xgb_conf": 0.9968,
+        "lstm_pred": "DOS_FLOOD",
+        "lstm_conf": 0.9998,
+        "ensemble_pred": "DOS_FLOOD",
+        "ensemble_conf": 0.9982,
+        "source_model": "ensemble"
+      },
+      {
+        "flow_index": 39,
+        "attack_type": "DOS_FLOOD",
+        "attack_type_confidence": 0.9998,
+        "attack_type_status": "DOS_FLOOD",
+        "xgb_pred": "DOS_FLOOD",
+        "xgb_conf": 0.9968,
+        "lstm_pred": "DOS_FLOOD",
+        "lstm_conf": 0.9998,
+        "ensemble_pred": "DOS_FLOOD",
+        "ensemble_conf": 0.9982,
+        "source_model": "ensemble"
+      },
+      {
+        "flow_index": 44,
+        "attack_type": "DOS_FLOOD",
+        "attack_type_confidence": 0.9998,
+        "attack_type_status": "DOS_FLOOD",
+        "xgb_pred": "DOS_FLOOD",
+        "xgb_conf": 0.9968,
+        "lstm_pred": "DOS_FLOOD",
+        "lstm_conf": 0.9998,
+        "ensemble_pred": "DOS_FLOOD",
+        "ensemble_conf": 0.9982,
+        "source_model": "ensemble"
+      },
+      {
+        "flow_index": 49,
+        "attack_type": "DOS_FLOOD",
+        "attack_type_confidence": 0.9998,
+        "attack_type_status": "DOS_FLOOD",
+        "xgb_pred": "DOS_FLOOD",
+        "xgb_conf": 0.9968,
+        "lstm_pred": "DOS_FLOOD",
+        "lstm_conf": 0.9998,
+        "ensemble_pred": "DOS_FLOOD",
+        "ensemble_conf": 0.9982,
+        "source_model": "ensemble"
+      },
+      {
+        "flow_index": 54,
+        "attack_type": "DOS_FLOOD",
+        "attack_type_confidence": 0.9998,
+        "attack_type_status": "DOS_FLOOD",
+        "xgb_pred": "DOS_FLOOD",
+        "xgb_conf": 0.9968,
+        "lstm_pred": "DOS_FLOOD",
+        "lstm_conf": 0.9998,
+        "ensemble_pred": "DOS_FLOOD",
+        "ensemble_conf": 0.9982,
+        "source_model": "ensemble"
+      },
+      {
+        "flow_index": 59,
+        "attack_type": "DOS_FLOOD",
+        "attack_type_confidence": 0.9998,
+        "attack_type_status": "DOS_FLOOD",
+        "xgb_pred": "DOS_FLOOD",
+        "xgb_conf": 0.9968,
+        "lstm_pred": "DOS_FLOOD",
+        "lstm_conf": 0.9998,
+        "ensemble_pred": "DOS_FLOOD",
+        "ensemble_conf": 0.9982,
+        "source_model": "ensemble"
+      },
+      {
+        "flow_index": 64,
+        "attack_type": "DOS_FLOOD",
+        "attack_type_confidence": 0.9998,
+        "attack_type_status": "DOS_FLOOD",
+        "xgb_pred": "DOS_FLOOD",
+        "xgb_conf": 0.9968,
+        "lstm_pred": "DOS_FLOOD",
+        "lstm_conf": 0.9998,
+        "ensemble_pred": "DOS_FLOOD",
+        "ensemble_conf": 0.9982,
+        "source_model": "ensemble"
+      },
+      {
+        "flow_index": 69,
+        "attack_type": "DOS_FLOOD",
+        "attack_type_confidence": 0.9998,
+        "attack_type_status": "DOS_FLOOD",
+        "xgb_pred": "DOS_FLOOD",
+        "xgb_conf": 0.9968,
+        "lstm_pred": "DOS_FLOOD",
+        "lstm_conf": 0.9998,
+        "ensemble_pred": "DOS_FLOOD",
+        "ensemble_conf": 0.9982,
+        "source_model": "ensemble"
+      },
+      {
+        "flow_index": 74,
+        "attack_type": "DOS_FLOOD",
+        "attack_type_confidence": 0.9998,
+        "attack_type_status": "DOS_FLOOD",
+        "xgb_pred": "DOS_FLOOD",
+        "xgb_conf": 0.9968,
+        "lstm_pred": "DOS_FLOOD",
+        "lstm_conf": 0.9998,
+        "ensemble_pred": "DOS_FLOOD",
+        "ensemble_conf": 0.9982,
+        "source_model": "ensemble"
+      },
+      {
+        "flow_index": 79,
+        "attack_type": "DOS_FLOOD",
+        "attack_type_confidence": 0.9998,
+        "attack_type_status": "DOS_FLOOD",
+        "xgb_pred": "DOS_FLOOD",
+        "xgb_conf": 0.9968,
+        "lstm_pred": "DOS_FLOOD",
+        "lstm_conf": 0.9998,
+        "ensemble_pred": "DOS_FLOOD",
+        "ensemble_conf": 0.9982,
+        "source_model": "ensemble"
+      },
+      {
+        "flow_index": 84,
+        "attack_type": "DOS_FLOOD",
+        "attack_type_confidence": 0.9998,
+        "attack_type_status": "DOS_FLOOD",
+        "xgb_pred": "DOS_FLOOD",
+        "xgb_conf": 0.9968,
+        "lstm_pred": "DOS_FLOOD",
+        "lstm_conf": 0.9998,
+        "ensemble_pred": "DOS_FLOOD",
+        "ensemble_conf": 0.9982,
+        "source_model": "ensemble"
+      },
+      {
+        "flow_index": 89,
+        "attack_type": "DOS_FLOOD",
+        "attack_type_confidence": 0.9998,
+        "attack_type_status": "DOS_FLOOD",
+        "xgb_pred": "DOS_FLOOD",
+        "xgb_conf": 0.9968,
+        "lstm_pred": "DOS_FLOOD",
+        "lstm_conf": 0.9998,
+        "ensemble_pred": "DOS_FLOOD",
+        "ensemble_conf": 0.9982,
+        "source_model": "ensemble"
+      },
+      {
+        "flow_index": 94,
+        "attack_type": "DOS_FLOOD",
+        "attack_type_confidence": 0.9998,
+        "attack_type_status": "DOS_FLOOD",
+        "xgb_pred": "DOS_FLOOD",
+        "xgb_conf": 0.9968,
+        "lstm_pred": "DOS_FLOOD",
+        "lstm_conf": 0.9998,
+        "ensemble_pred": "DOS_FLOOD",
+        "ensemble_conf": 0.9982,
+        "source_model": "ensemble"
+      },
+      {
+        "flow_index": 99,
+        "attack_type": "DOS_FLOOD",
+        "attack_type_confidence": 0.9998,
+        "attack_type_status": "DOS_FLOOD",
+        "xgb_pred": "DOS_FLOOD",
+        "xgb_conf": 0.9968,
+        "lstm_pred": "DOS_FLOOD",
+        "lstm_conf": 0.9998,
+        "ensemble_pred": "DOS_FLOOD",
+        "ensemble_conf": 0.9982,
+        "source_model": "ensemble"
+      },
+      {
+        "flow_index": 104,
+        "attack_type": "DOS_FLOOD",
+        "attack_type_confidence": 0.9998,
+        "attack_type_status": "DOS_FLOOD",
+        "xgb_pred": "DOS_FLOOD",
+        "xgb_conf": 0.9968,
+        "lstm_pred": "DOS_FLOOD",
+        "lstm_conf": 0.9998,
+        "ensemble_pred": "DOS_FLOOD",
+        "ensemble_conf": 0.9982,
+        "source_model": "ensemble"
+      },
+      {
+        "flow_index": 109,
+        "attack_type": "DOS_FLOOD",
+        "attack_type_confidence": 0.9998,
+        "attack_type_status": "DOS_FLOOD",
+        "xgb_pred": "DOS_FLOOD",
+        "xgb_conf": 0.9968,
+        "lstm_pred": "DOS_FLOOD",
+        "lstm_conf": 0.9998,
+        "ensemble_pred": "DOS_FLOOD",
+        "ensemble_conf": 0.9982,
+        "source_model": "ensemble"
+      },
+      {
+        "flow_index": 114,
+        "attack_type": "DOS_FLOOD",
+        "attack_type_confidence": 0.9998,
+        "attack_type_status": "DOS_FLOOD",
+        "xgb_pred": "DOS_FLOOD",
+        "xgb_conf": 0.9968,
+        "lstm_pred": "DOS_FLOOD",
+        "lstm_conf": 0.9998,
+        "ensemble_pred": "DOS_FLOOD",
+        "ensemble_conf": 0.9982,
+        "source_model": "ensemble"
+      },
+      {
+        "flow_index": 119,
+        "attack_type": "DOS_FLOOD",
+        "attack_type_confidence": 0.9998,
+        "attack_type_status": "DOS_FLOOD",
+        "xgb_pred": "DOS_FLOOD",
+        "xgb_conf": 0.9968,
+        "lstm_pred": "DOS_FLOOD",
+        "lstm_conf": 0.9998,
+        "ensemble_pred": "DOS_FLOOD",
+        "ensemble_conf": 0.9982,
+        "source_model": "ensemble"
+      },
+      {
+        "flow_index": 124,
+        "attack_type": "DOS_FLOOD",
+        "attack_type_confidence": 0.9998,
+        "attack_type_status": "DOS_FLOOD",
+        "xgb_pred": "DOS_FLOOD",
+        "xgb_conf": 0.9968,
+        "lstm_pred": "DOS_FLOOD",
+        "lstm_conf": 0.9998,
+        "ensemble_pred": "DOS_FLOOD",
+        "ensemble_conf": 0.9982,
+        "source_model": "ensemble"
+      },
+      {
+        "flow_index": 129,
+        "attack_type": "DOS_FLOOD",
+        "attack_type_confidence": 0.9998,
+        "attack_type_status": "DOS_FLOOD",
+        "xgb_pred": "DOS_FLOOD",
+        "xgb_conf": 0.9968,
+        "lstm_pred": "DOS_FLOOD",
+        "lstm_conf": 0.9998,
+        "ensemble_pred": "DOS_FLOOD",
+        "ensemble_conf": 0.9982,
+        "source_model": "ensemble"
+      },
+      {
+        "flow_index": 134,
+        "attack_type": "DOS_FLOOD",
+        "attack_type_confidence": 0.9998,
+        "attack_type_status": "DOS_FLOOD",
+        "xgb_pred": "DOS_FLOOD",
+        "xgb_conf": 0.9968,
+        "lstm_pred": "DOS_FLOOD",
+        "lstm_conf": 0.9998,
+        "ensemble_pred": "DOS_FLOOD",
+        "ensemble_conf": 0.9982,
+        "source_model": "ensemble"
+      },
+      {
+        "flow_index": 139,
+        "attack_type": "DOS_FLOOD",
+        "attack_type_confidence": 0.9998,
+        "attack_type_status": "DOS_FLOOD",
+        "xgb_pred": "DOS_FLOOD",
+        "xgb_conf": 0.9968,
+        "lstm_pred": "DOS_FLOOD",
+        "lstm_conf": 0.9998,
+        "ensemble_pred": "DOS_FLOOD",
+        "ensemble_conf": 0.9982,
+        "source_model": "ensemble"
+      }
+    ],
+    "flow_metadata_preview": [
+      {
+        "Flow ID": "1.1.1.1-192.168.67.129-40112-80-6",
+        "Src IP": "1.1.1.1",
+        "Src Port": 40112,
+        "Dst IP": "192.168.67.129",
+        "Dst Port": 80,
+        "Protocol": 6,
+        "Timestamp": "15/11/2023 12:14:21 AM",
+        "Flow Duration": 4900000,
+        "Label": "NeedManualLabel"
+      },
+      {
+        "Flow ID": "1.1.1.1-192.168.67.129-20229-80-17",
+        "Src IP": "1.1.1.1",
+        "Src Port": 20229,
+        "Dst IP": "192.168.67.129",
+        "Dst Port": 80,
+        "Protocol": 17,
+        "Timestamp": "15/11/2023 12:13:45 AM",
+        "Flow Duration": 9800,
+        "Label": "NeedManualLabel"
+      },
+      {
+        "Flow ID": "1.1.1.1-192.168.67.129-20312-53-17",
+        "Src IP": "1.1.1.1",
+        "Src Port": 20312,
+        "Dst IP": "192.168.67.129",
+        "Dst Port": 53,
+        "Protocol": 17,
+        "Timestamp": "15/11/2023 12:13:45 AM",
+        "Flow Duration": 9800,
+        "Label": "NeedManualLabel"
+      },
+      {
+        "Flow ID": "1.1.1.1-192.168.67.129-10179-80-6",
+        "Src IP": "1.1.1.1",
+        "Src Port": 10179,
+        "Dst IP": "192.168.67.129",
+        "Dst Port": 80,
+        "Protocol": 6,
+        "Timestamp": "15/11/2023 12:13:20 AM",
+        "Flow Duration": 19000,
+        "Label": "NeedManualLabel"
+      },
+      {
+        "Flow ID": "1.1.1.1-192.168.67.129-10382-80-6",
+        "Src IP": "1.1.1.1",
+        "Src Port": 10382,
+        "Dst IP": "192.168.67.129",
+        "Dst Port": 80,
+        "Protocol": 6,
+        "Timestamp": "15/11/2023 12:13:21 AM",
+        "Flow Duration": 19000,
+        "Label": "NeedManualLabel"
+      },
+      {
+        "Flow ID": "1.1.1.1-192.168.67.129-10495-80-6",
+        "Src IP": "1.1.1.1",
+        "Src Port": 10495,
+        "Dst IP": "192.168.67.129",
+        "Dst Port": 80,
+        "Protocol": 6,
+        "Timestamp": "15/11/2023 12:13:21 AM",
+        "Flow Duration": 19000,
+        "Label": "NeedManualLabel"
+      },
+      {
+        "Flow ID": "1.1.1.1-192.168.67.129-20422-123-17",
+        "Src IP": "1.1.1.1",
+        "Src Port": 20422,
+        "Dst IP": "192.168.67.129",
+        "Dst Port": 123,
+        "Protocol": 17,
+        "Timestamp": "15/11/2023 12:13:45 AM",
+        "Flow Duration": 9800,
+        "Label": "NeedManualLabel"
+      },
+      {
+        "Flow ID": "1.1.1.1-192.168.67.129-10066-80-6",
+        "Src IP": "1.1.1.1",
+        "Src Port": 10066,
+        "Dst IP": "192.168.67.129",
+        "Dst Port": 80,
+        "Protocol": 6,
+        "Timestamp": "15/11/2023 12:13:20 AM",
+        "Flow Duration": 19000,
+        "Label": "NeedManualLabel"
+      },
+      {
+        "Flow ID": "1.1.1.1-192.168.67.129-10235-80-6",
+        "Src IP": "1.1.1.1",
+        "Src Port": 10235,
+        "Dst IP": "192.168.67.129",
+        "Dst Port": 80,
+        "Protocol": 6,
+        "Timestamp": "15/11/2023 12:13:20 AM",
+        "Flow Duration": 19000,
+        "Label": "NeedManualLabel"
+      },
+      {
+        "Flow ID": "1.1.1.1-192.168.67.129-10404-80-6",
+        "Src IP": "1.1.1.1",
+        "Src Port": 10404,
+        "Dst IP": "192.168.67.129",
+        "Dst Port": 80,
+        "Protocol": 6,
+        "Timestamp": "15/11/2023 12:13:21 AM",
+        "Flow Duration": 19000,
+        "Label": "NeedManualLabel"
+      },
+      {
+        "Flow ID": "1.1.1.1-192.168.67.129-10720-80-6",
+        "Src IP": "1.1.1.1",
+        "Src Port": 10720,
+        "Dst IP": "192.168.67.129",
+        "Dst Port": 80,
+        "Protocol": 6,
+        "Timestamp": "15/11/2023 12:13:22 AM",
+        "Flow Duration": 19000,
+        "Label": "NeedManualLabel"
+      },
+      {
+        "Flow ID": "1.1.1.1-192.168.67.129-10551-80-6",
+        "Src IP": "1.1.1.1",
+        "Src Port": 10551,
+        "Dst IP": "192.168.67.129",
+        "Dst Port": 80,
+        "Protocol": 6,
+        "Timestamp": "15/11/2023 12:13:21 AM",
+        "Flow Duration": 19000,
+        "Label": "NeedManualLabel"
+      },
+      {
+        "Flow ID": "1.1.1.1-192.168.67.129-40031-8080-6",
+        "Src IP": "1.1.1.1",
+        "Src Port": 40031,
+        "Dst IP": "192.168.67.129",
+        "Dst Port": 8080,
+        "Protocol": 6,
+        "Timestamp": "15/11/2023 12:14:20 AM",
+        "Flow Duration": 4900000,
+        "Label": "NeedManualLabel"
+      },
+      {
+        "Flow ID": "1.1.1.1-192.168.67.129-40090-80-6",
+        "Src IP": "1.1.1.1",
+        "Src Port": 40090,
+        "Dst IP": "192.168.67.129",
+        "Dst Port": 80,
+        "Protocol": 6,
+        "Timestamp": "15/11/2023 12:14:21 AM",
+        "Flow Duration": 4900000,
+        "Label": "NeedManualLabel"
+      },
+      {
+        "Flow ID": "1.1.1.1-192.168.67.129-20465-80-17",
+        "Src IP": "1.1.1.1",
+        "Src Port": 20465,
+        "Dst IP": "192.168.67.129",
+        "Dst Port": 80,
+        "Protocol": 17,
+        "Timestamp": "15/11/2023 12:13:45 AM",
+        "Flow Duration": 9800,
+        "Label": "NeedManualLabel"
+      },
+      {
+        "Flow ID": "1.1.1.1-192.168.67.129-20448-53-17",
+        "Src IP": "1.1.1.1",
+        "Src Port": 20448,
+        "Dst IP": "192.168.67.129",
+        "Dst Port": 53,
+        "Protocol": 17,
+        "Timestamp": "15/11/2023 12:13:45 AM",
+        "Flow Duration": 9800,
+        "Label": "NeedManualLabel"
+      },
+      {
+        "Flow ID": "1.1.1.1-192.168.67.129-40128-80-6",
+        "Src IP": "1.1.1.1",
+        "Src Port": 40128,
+        "Dst IP": "192.168.67.129",
+        "Dst Port": 80,
+        "Protocol": 6,
+        "Timestamp": "15/11/2023 12:14:21 AM",
+        "Flow Duration": 4900000,
+        "Label": "NeedManualLabel"
+      },
+      {
+        "Flow ID": "1.1.1.1-192.168.67.129-40127-8080-6",
+        "Src IP": "1.1.1.1",
+        "Src Port": 40127,
+        "Dst IP": "192.168.67.129",
+        "Dst Port": 8080,
+        "Protocol": 6,
+        "Timestamp": "15/11/2023 12:14:21 AM",
+        "Flow Duration": 4900000,
+        "Label": "NeedManualLabel"
+      },
+      {
+        "Flow ID": "1.1.1.1-192.168.67.129-10348-80-6",
+        "Src IP": "1.1.1.1",
+        "Src Port": 10348,
+        "Dst IP": "192.168.67.129",
+        "Dst Port": 80,
+        "Protocol": 6,
+        "Timestamp": "15/11/2023 12:13:21 AM",
+        "Flow Duration": 19000,
+        "Label": "NeedManualLabel"
+      },
+      {
+        "Flow ID": "1.1.1.1-192.168.67.129-40056-80-6",
+        "Src IP": "1.1.1.1",
+        "Src Port": 40056,
+        "Dst IP": "192.168.67.129",
+        "Dst Port": 80,
+        "Protocol": 6,
+        "Timestamp": "15/11/2023 12:14:20 AM",
+        "Flow Duration": 4900000,
+        "Label": "NeedManualLabel"
+      },
+      {
+        "Flow ID": "1.1.1.1-192.168.67.129-20291-443-17",
+        "Src IP": "1.1.1.1",
+        "Src Port": 20291,
+        "Dst IP": "192.168.67.129",
+        "Dst Port": 443,
+        "Protocol": 17,
+        "Timestamp": "15/11/2023 12:13:45 AM",
+        "Flow Duration": 9800,
+        "Label": "NeedManualLabel"
+      },
+      {
+        "Flow ID": "1.1.1.1-192.168.67.129-20327-443-17",
+        "Src IP": "1.1.1.1",
+        "Src Port": 20327,
+        "Dst IP": "192.168.67.129",
+        "Dst Port": 443,
+        "Protocol": 17,
+        "Timestamp": "15/11/2023 12:13:45 AM",
+        "Flow Duration": 9800,
+        "Label": "NeedManualLabel"
+      },
+      {
+        "Flow ID": "1.1.1.1-192.168.67.129-10567-80-6",
+        "Src IP": "1.1.1.1",
+        "Src Port": 10567,
+        "Dst IP": "192.168.67.129",
+        "Dst Port": 80,
+        "Protocol": 6,
+        "Timestamp": "15/11/2023 12:13:21 AM",
+        "Flow Duration": 19000,
+        "Label": "NeedManualLabel"
+      },
+      {
+        "Flow ID": "1.1.1.1-192.168.67.129-10129-80-6",
+        "Src IP": "1.1.1.1",
+        "Src Port": 10129,
+        "Dst IP": "192.168.67.129",
+        "Dst Port": 80,
+        "Protocol": 6,
+        "Timestamp": "15/11/2023 12:13:20 AM",
+        "Flow Duration": 19000,
+        "Label": "NeedManualLabel"
+      },
+      {
+        "Flow ID": "1.1.1.1-192.168.67.129-10770-80-6",
+        "Src IP": "1.1.1.1",
+        "Src Port": 10770,
+        "Dst IP": "192.168.67.129",
+        "Dst Port": 80,
+        "Protocol": 6,
+        "Timestamp": "15/11/2023 12:13:22 AM",
+        "Flow Duration": 19000,
+        "Label": "NeedManualLabel"
+      }
+    ]
+  },
+  "response_plan": [
+    {
+      "type": "block_ip",
+      "target": "1.1.1.1",
+      "description": "Block confirmed malicious source IP 1.1.1.1 after analyst validation",
+      "status": "Approved"
+    },
+    {
+      "type": "isolate_host",
+      "target": "my-linux-machine",
+      "description": "Isolate my-linux-machine if compromise is confirmed or the service is business critical",
+      "status": "Approved"
+    }
+  ],
+  "investigation_summary": "- Evidence: Autonomous responder enriched INC-IDS-20260629-201807-340 using real Hybrid IDS evidence and analyst context.\\n- Business context: impact=Critical; system role=Public Web Gateway.\\n- Verification recommendation: correlate source IP, target host, flow timestamp, firewall/WAF logs, endpoint connections, and service/authentication logs.\\n- Mitigation recommendation: preserve evidence first, then block the source IP only after validation; isolate the host only if compromise indicators are confirmed.\\n- Post-mitigation validation: confirm alerts stop, legitimate traffic still works, and containment rules can be safely rolled back.\\n- Analyst decision: suspicious pending verification.",
+  "markdown_report": "# Forensic Summary: INC-IDS-20260629-201807-340\n\n## 1. Executive Summary\nThe SOAR module received a real detection from the Hybrid IDS and escalated it for investigation. The selected incident is **DOS_FLOOD (258 rows)** affecting **my-linux-machine** with reported severity **High**.\n\n## 2. Detection Evidence\n- **Source IP:** `1.1.1.1`\n- **Target IP:** `192.168.67.129`\n- **Target Host:** `my-linux-machine`\n- **Business Impact:** `Critical`\n- **System Role:** `Public Web Gateway`\n- **MITRE Mapping:** `T1498.001` - `Direct Network Flood`\n- **Traffic Stats:** `{\"packets\": 0, \"bytes\": 0, \"duration_ms\": 4900000, \"protocol\": \"6\", \"src_port\": \"40112\", \"dst_port\": \"80\", \"service\": \"http\", \"flow_index\": \"-\", \"label\": \"NeedManualLabel\", \"reconstruction_error\": null}`\n\n## 3. Original Flow Metadata\n- **Source IP:** `1.1.1.1`\n- **Target IP:** `192.168.67.129`\n- **Source Port:** `40112`\n- **Target Port:** `80`\n- **Protocol:** `6`\n- **Packets:** `0`\n- **Bytes:** `0`\n- **Duration:** `4900000`\n- **Label / Flow Finding:** `NeedManualLabel`\n- **Reconstruction Error:** `None`\n\n## 4. Analyst Notes\n```text\nBusiness Impact: Critical\nServer/Application Role: Public Web Gateway\nSOC Observables / Manual Logs: Add firewall, endpoint, web server, authentication, or SOC analyst notes here before running the AI responder.\n```\n\n## 5. Forensic Findings\nThe event should be treated as suspicious because it was forwarded by the Hybrid IDS pipeline after combining binary classification, multiclass classification, packet-rule evidence, and zero-day/anomaly output. The current evidence is enough to justify investigation, but confirmation requires correlation with host, firewall, service, and authentication logs.\n\n## 6. Verification Recommendations\n1. Confirm that `1.1.1.1` appears in firewall, WAF, proxy, or router logs during the alert window.\n2. Confirm that `my-linux-machine` / `192.168.67.129` received the same traffic pattern shown in the IDS flow metadata.\n3. Check endpoint process list, active sockets, scheduled tasks, startup entries, and recent parent-child process trees.\n4. Review authentication logs and service logs for failed logins, exploit errors, abnormal HTTP status codes, or unexpected database queries.\n5. Compare the traffic with expected business behavior to rule out backup jobs, scanners, monitoring tools, or lab-generated traffic.\n\n## 7. Mitigation and Containment Recommendations\n1. Preserve evidence first: export the incident JSON, IDS report, relevant PCAP/CSV rows, endpoint logs, and firewall logs.\n2. If verification confirms malicious traffic, approve the `block_ip` action for `1.1.1.1`.\n3. If host compromise indicators appear, approve `isolate_host` for `my-linux-machine` while keeping IR controller access allowed.\n4. Avoid killing processes unless a specific suspicious PID/process is confirmed.\n5. After containment, create or update the SOC ticket and document every action taken.\n\n## 8. Recovery and Post-Mitigation Validation\n1. Confirm that new alerts from the same source stop after the block rule is applied.\n2. Confirm that legitimate users and services can still reach the protected application.\n3. Re-run CICFlowMeter/IDS analysis on fresh traffic to verify that malicious flows decreased.\n4. Remove temporary containment only after the analyst confirms clean endpoint state and no repeated indicators.\n5. Add lessons learned: tuning thresholds, WAF rules, firewall policy, account hardening, or endpoint monitoring.\n\n## 9. Final Analyst Decision\nCurrent decision: **Suspicious pending verification**. The recommended action is to verify the source, preserve evidence, then apply containment only if the logs confirm malicious behavior.\n"
+}

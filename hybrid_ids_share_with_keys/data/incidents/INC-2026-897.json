@@ -1,0 +1,40 @@
+{
+  "id": "INC-2026-897",
+  "timestamp": "2026-06-25T00:42:02.399945+00:00",
+  "source_ip": "185.220.101.5",
+  "target_ip": "10.0.0.5",
+  "target_host": "prod-web-01",
+  "attack_type": "UDP Flood (DDoS)",
+  "severity": "Critical",
+  "cvss": 9.1,
+  "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:C/C:N/I:N/A:H",
+  "mitre": {
+    "id": "T1498.001",
+    "name": "Network Denial of Service: Direct Flow Flood",
+    "tactic": "Impact"
+  },
+  "investigation_summary": "Forensic investigator identified a matching signature for UDP Flood (DDoS) targeting host prod-web-01. The high rate of packet transmissions over a short period suggests an automated command-and-control engine or scripting tool. Additional system logs indicate unlogged processes spawning and communicating with external socket pools. Recommended immediate quarantine and port lockdowns.",
+  "response_plan": [
+    {
+      "type": "block_ip",
+      "target": "185.220.101.5",
+      "description": "Block attacker IP 185.220.101.5 globally on border gateway firewalls",
+      "status": "Approved"
+    },
+    {
+      "type": "isolate_host",
+      "target": "prod-web-01",
+      "description": "Isolate victim host prod-web-01 immediately, disabling LAN access and allowing only the security backend control socket",
+      "status": "Approved"
+    }
+  ],
+  "markdown_report": "# Incident Investigation Report: INC-2026-897\n## Executive Summary\nOn June 24, 2026, our automated Intrusion Detection System identified structural anomalies matching **UDP Flood (DDoS)** targeting our high-value server asset **prod-web-01**. This report covers the full technical findings and outlines containment procedures.\n\n## Threat Profile & Metrics\n- **Incident ID**: INC-2026-897\n- **Source Attacker IP**: `185.220.101.5`\n- **Target Endpoint**: `prod-web-01` (IP: 10.0.0.5)\n- **Network Protocol**: UDP / Port 80\n- **CVSS Score**: **9.1 (Critical)**\n- **MITRE Tactic**: Impact\n- **MITRE Technique**: Network Denial of Service: Direct Flow Flood (`T1498.001`)\n\n## Technical Analysis\nA deep heuristic packet inspection was triggered following spikes in packet counts (`450230` packets, `582310400` bytes). These patterns indicate malicious automation mimicking legitimate operations.\n\n## Containment Actions\n1. **Host Isolation**: Restrict prod-web-01 using the local agent's automated iptables sandbox interface.\n2. **Attacker Blacklist**: Inject `185.220.101.5` into our global border routing blocklists.\n3. **Log Audit**: Investigate process list trees for unauthorized binaries executing in system memory.",
+  "status": "Mitigated",
+  "traffic_stats": {
+    "packets": 450230,
+    "bytes": 582310400,
+    "duration_ms": 15200,
+    "protocol": "UDP",
+    "service": "http"
+  }
+}

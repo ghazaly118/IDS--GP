@@ -1,0 +1,38 @@
+{
+  "id": "INC-2026-102",
+  "timestamp": "2026-06-24T12:28:00-07:00",
+  "source_ip": "185.220.101.5",
+  "target_ip": "10.0.0.5",
+  "target_host": "prod-web-01",
+  "attack_type": "UDP Flood / DDoS",
+  "severity": "Critical",
+  "cvss": 9.1,
+  "status": "Mitigated",
+  "mitre": {
+    "id": "T1498.001",
+    "name": "Direct Network Flood",
+    "tactic": "Impact"
+  },
+  "traffic_stats": {
+    "packets": 450230,
+    "bytes": 582310400,
+    "duration_ms": 15200,
+    "protocol": "UDP",
+    "service": "http"
+  },
+  "response_plan": [
+    {
+      "type": "block_ip",
+      "target": "185.220.101.5",
+      "description": "Null route attacker IP globally",
+      "status": "Approved"
+    },
+    {
+      "type": "isolate_host",
+      "target": "prod-web-01",
+      "description": "Isolate compromised frontend host",
+      "status": "Approved"
+    }
+  ],
+  "investigation_summary": "Massive volume of stateless UDP packets originating from Tor exit node targeting port 80. Network saturation has exceeded 90% bandwidth threshold. Automated agent successfully blocked the source IP and isolated the web host, reducing ingress volume back to normal."
+}

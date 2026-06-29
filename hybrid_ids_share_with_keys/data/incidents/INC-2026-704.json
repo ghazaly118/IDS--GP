@@ -1,0 +1,40 @@
+{
+  "id": "INC-2026-704",
+  "timestamp": "2026-06-25T00:58:25.772326+00:00",
+  "source_ip": "45.132.89.23",
+  "target_ip": "10.0.0.12",
+  "target_host": "db-srv-prod",
+  "attack_type": "Database SQL Exploitation",
+  "severity": "High",
+  "cvss": 8.8,
+  "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
+  "mitre": {
+    "id": "T1190",
+    "name": "Exploit Public-Facing Application",
+    "tactic": "Initial Access"
+  },
+  "investigation_summary": "Forensic investigator identified a matching signature for Database SQL Exploitation targeting host db-srv-prod. The high rate of packet transmissions over a short period suggests an automated command-and-control engine or scripting tool. Additional system logs indicate unlogged processes spawning and communicating with external socket pools. Recommended immediate quarantine and port lockdowns.",
+  "response_plan": [
+    {
+      "type": "block_ip",
+      "target": "45.132.89.23",
+      "description": "Block attacker IP 45.132.89.23 globally on border gateway firewalls",
+      "status": "Pending"
+    },
+    {
+      "type": "isolate_host",
+      "target": "db-srv-prod",
+      "description": "Isolate victim host db-srv-prod immediately, disabling LAN access and allowing only the security backend control socket",
+      "status": "Pending"
+    }
+  ],
+  "markdown_report": "# Incident Investigation Report: INC-2026-704\n## Executive Summary\nOn June 24, 2026, our automated Intrusion Detection System identified structural anomalies matching **Database SQL Exploitation** targeting our high-value server asset **db-srv-prod**. This report covers the full technical findings and outlines containment procedures.\n\n## Threat Profile & Metrics\n- **Incident ID**: INC-2026-704\n- **Source Attacker IP**: `45.132.89.23`\n- **Target Endpoint**: `db-srv-prod` (IP: 10.0.0.12)\n- **Network Protocol**: TCP / Port 5432\n- **CVSS Score**: **8.8 (High)**\n- **MITRE Tactic**: Initial Access\n- **MITRE Technique**: Exploit Public-Facing Application (`T1190`)\n\n## Technical Analysis\nA deep heuristic packet inspection was triggered following spikes in packet counts (`124` packets, `48200` bytes). These patterns indicate malicious automation mimicking legitimate operations.\n\n## Containment Actions\n1. **Host Isolation**: Restrict db-srv-prod using the local agent's automated iptables sandbox interface.\n2. **Attacker Blacklist**: Inject `45.132.89.23` into our global border routing blocklists.\n3. **Log Audit**: Investigate process list trees for unauthorized binaries executing in system memory.",
+  "status": "Investigated",
+  "traffic_stats": {
+    "packets": 124,
+    "bytes": 48200,
+    "duration_ms": 1250,
+    "protocol": "TCP",
+    "service": "postgresql"
+  }
+}

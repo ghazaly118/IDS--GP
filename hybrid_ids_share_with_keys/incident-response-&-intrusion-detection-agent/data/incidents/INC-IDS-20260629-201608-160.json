@@ -1,0 +1,966 @@
+{
+  "id": "INC-IDS-20260629-201608-160",
+  "timestamp": "2026-06-29T20:16:08.471455+00:00",
+  "source_ip": "192.168.67.128",
+  "target_ip": "192.168.67.128",
+  "target_host": "prod-web-01",
+  "attack_type": "WEBATTACK (300 rows)",
+  "severity": "High",
+  "cvss": 8.0,
+  "status": "Investigated",
+  "mitre": {
+    "id": "T1040",
+    "name": "Network Sniffing",
+    "tactic": "Credential Access"
+  },
+  "traffic_stats": {
+    "packets": 0,
+    "bytes": 0,
+    "duration_ms": 851832,
+    "protocol": "6",
+    "src_port": "20000",
+    "dst_port": "21",
+    "service": "http",
+    "flow_index": "-",
+    "label": "NeedManualLabel",
+    "reconstruction_error": null
+  },
+  "flow_metadata": {
+    "source_ip": "1.1.1.1",
+    "target_ip": "192.168.67.128",
+    "source_port": "20000",
+    "target_port": "21",
+    "protocol": "6",
+    "packets": 0,
+    "bytes": 0,
+    "duration_ms": 851832,
+    "service": "http",
+    "label": "NeedManualLabel",
+    "flow_index": "-",
+    "reconstruction_error": null
+  },
+  "ids_analysis_result": {
+    "filename": "webattack.pcap",
+    "generated_csv": "C:\\Users\\amoha\\OneDrive\\Desktop\\gp\\gp\\hybrid_ids_share_with_keys\\outputs\\webattack.pcap_Flow.csv",
+    "flows_analyzed": 1540,
+    "attack_count": 305,
+    "benign_count": 1235,
+    "attack_rate": 19.81,
+    "official_binary_decision": "ATTACK",
+    "binary_summary": {
+      "file": "webattack.pcap_Flow.csv",
+      "flows": 1540,
+      "lstm_mean": 0.317,
+      "lstm_atk_percent": 7.54,
+      "lstm_count": 23,
+      "xgb_mean": 0.1997,
+      "xgb_atk_percent": 0.0,
+      "xgb_count": 0,
+      "ENSEMBLE": "ATTACK",
+      "status": "OK",
+      "alert_tolerance": 0,
+      "seq_len": 20,
+      "stride": 5,
+      "xgb_threshold": 0.5391536951065063,
+      "lstm_threshold": 0.5,
+      "matched_features": 63,
+      "missing_features": 0,
+      "missing_feature_names": [],
+      "feature_coverage_percent": 100.0,
+      "duplicate_mapped_columns": [
+        "Total Fwd Packets",
+        "Total Backward Packets",
+        "Fwd Packets Length Total",
+        "Bwd Packets Length Total",
+        "Avg Packet Size",
+        "Avg Fwd Segment Size",
+        "Avg Bwd Segment Size",
+        "Init Fwd Win Bytes",
+        "Init Bwd Win Bytes",
+        "Fwd Act Data Packets",
+        "CWE Flag Count"
+      ],
+      "fuzzy_renamed_columns_count": 74,
+      "lstm_window_count": 305
+    },
+    "multiclass_summary": {
+      "file": "webattack.pcap_Flow.csv",
+      "status": "ok",
+      "mode": "ENSEMBLE",
+      "Total_Flows": 1540,
+      "Effective_Predictions": 305,
+      "Matched_Features": 70,
+      "Missing_Features": 0,
+      "Feature_Coverage_%": 100.0,
+      "Avg_Confidence": 0.9474,
+      "Agreement_Rate_%": 0.0,
+      "Unknown_Rate_%": 14.75,
+      "Top_1_Attack": "WEBATTACK (300 rows)",
+      "Top_2_Attack": "BOT (5 rows)",
+      "Top_3_Attack": "-",
+      "Error": "",
+      "display_attack_type_summary": {
+        "WEBATTACK": 300,
+        "BOT": 5
+      },
+      "message": "Multiclass executed because the official binary decision was ATTACK."
+    },
+    "attack_type_summary": {
+      "WEBATTACK": 300,
+      "BOT": 5
+    },
+    "rule_result": {
+      "status": "ok",
+      "engine": "dpkt_pcap_rules",
+      "pcap_file": "webattack.pcap",
+      "message": "Packet rules executed in parallel with the AI pipeline.",
+      "summary": {
+        "total_alerts": 15158,
+        "packets_processed": 76682,
+        "processing_time_sec": 20.48,
+        "window_size_sec": 2.0,
+        "dos_threshold_per_ip": 78,
+        "dos_threshold_aggregated": 200,
+        "average_packet_rate": 1571.48,
+        "attack_type_summary": {
+          "web_attack": 92,
+          "brute_force": 14820,
+          "botnet": 162,
+          "dos": 62,
+          "port_scan": 22
+        },
+        "top_sources": [
+          {
+            "src": "192.168.67.128",
+            "count": 12510
+          },
+          {
+            "src": "1.1.1.1",
+            "count": 2621
+          },
+          {
+            "src": "192.168.67.129",
+            "count": 3
+          }
+        ]
+      },
+      "sample_alerts": [
+        {
+          "type": "brute_force",
+          "source": "signature",
+          "msg": "Brute Force signature matched",
+          "src": "192.168.67.128",
+          "dst": "1.1.1.1"
+        },
+        {
+          "type": "brute_force",
+          "source": "signature",
+          "msg": "Brute Force signature matched",
+          "src": "192.168.67.128",
+          "dst": "1.1.1.1"
+        },
+        {
+          "type": "brute_force",
+          "source": "signature",
+          "msg": "Brute Force signature matched",
+          "src": "192.168.67.128",
+          "dst": "1.1.1.1"
+        },
+        {
+          "type": "brute_force",
+          "source": "signature",
+          "msg": "Brute Force signature matched",
+          "src": "192.168.67.128",
+          "dst": "1.1.1.1"
+        },
+        {
+          "type": "brute_force",
+          "source": "signature",
+          "msg": "Brute Force signature matched",
+          "src": "192.168.67.128",
+          "dst": "1.1.1.1"
+        },
+        {
+          "type": "brute_force",
+          "source": "signature",
+          "msg": "Brute Force signature matched",
+          "src": "192.168.67.128",
+          "dst": "1.1.1.1"
+        },
+        {
+          "type": "brute_force",
+          "source": "signature",
+          "msg": "Brute Force signature matched",
+          "src": "192.168.67.128",
+          "dst": "1.1.1.1"
+        },
+        {
+          "type": "brute_force",
+          "source": "signature",
+          "msg": "Brute Force signature matched",
+          "src": "192.168.67.128",
+          "dst": "1.1.1.1"
+        },
+        {
+          "type": "brute_force",
+          "source": "signature",
+          "msg": "Brute Force signature matched",
+          "src": "192.168.67.128",
+          "dst": "1.1.1.1"
+        },
+        {
+          "type": "brute_force",
+          "source": "signature",
+          "msg": "Brute Force signature matched",
+          "src": "192.168.67.128",
+          "dst": "1.1.1.1"
+        },
+        {
+          "type": "brute_force",
+          "source": "signature",
+          "msg": "Brute Force signature matched",
+          "src": "192.168.67.128",
+          "dst": "1.1.1.1"
+        },
+        {
+          "type": "brute_force",
+          "source": "signature",
+          "msg": "Brute Force signature matched",
+          "src": "192.168.67.128",
+          "dst": "1.1.1.1"
+        },
+        {
+          "type": "brute_force",
+          "source": "signature",
+          "msg": "Brute Force signature matched",
+          "src": "192.168.67.128",
+          "dst": "1.1.1.1"
+        },
+        {
+          "type": "brute_force",
+          "source": "signature",
+          "msg": "Brute Force signature matched",
+          "src": "192.168.67.128",
+          "dst": "1.1.1.1"
+        },
+        {
+          "type": "brute_force",
+          "source": "signature",
+          "msg": "Brute Force signature matched",
+          "src": "192.168.67.128",
+          "dst": "1.1.1.1"
+        },
+        {
+          "type": "brute_force",
+          "source": "signature",
+          "msg": "Brute Force signature matched",
+          "src": "192.168.67.128",
+          "dst": "1.1.1.1"
+        },
+        {
+          "type": "brute_force",
+          "source": "signature",
+          "msg": "Brute Force signature matched",
+          "src": "192.168.67.128",
+          "dst": "1.1.1.1"
+        },
+        {
+          "type": "brute_force",
+          "source": "signature",
+          "msg": "Brute Force signature matched",
+          "src": "192.168.67.128",
+          "dst": "1.1.1.1"
+        },
+        {
+          "type": "brute_force",
+          "source": "signature",
+          "msg": "Brute Force signature matched",
+          "src": "192.168.67.128",
+          "dst": "1.1.1.1"
+        },
+        {
+          "type": "brute_force",
+          "source": "signature",
+          "msg": "Brute Force signature matched",
+          "src": "192.168.67.128",
+          "dst": "1.1.1.1"
+        },
+        {
+          "type": "brute_force",
+          "source": "signature",
+          "msg": "Brute Force signature matched",
+          "src": "192.168.67.128",
+          "dst": "1.1.1.1"
+        },
+        {
+          "type": "brute_force",
+          "source": "signature",
+          "msg": "Brute Force signature matched",
+          "src": "192.168.67.128",
+          "dst": "1.1.1.1"
+        },
+        {
+          "type": "brute_force",
+          "source": "signature",
+          "msg": "Brute Force signature matched",
+          "src": "192.168.67.128",
+          "dst": "1.1.1.1"
+        },
+        {
+          "type": "brute_force",
+          "source": "signature",
+          "msg": "Brute Force signature matched",
+          "src": "192.168.67.128",
+          "dst": "1.1.1.1"
+        },
+        {
+          "type": "brute_force",
+          "source": "signature",
+          "msg": "Brute Force signature matched",
+          "src": "192.168.67.128",
+          "dst": "1.1.1.1"
+        }
+      ]
+    },
+    "zero_day_summary": {
+      "file": "webattack.pcap_Flow.csv",
+      "status": "skipped",
+      "model_type": "autoencoder",
+      "decision": "SKIPPED",
+      "message": "Zero-day detector skipped because the official binary decision was ATTACK. Autoencoder is only executed for files classified as BENIGN/SAFE by the binary model.",
+      "rows": 1540,
+      "threshold": null,
+      "mean_reconstruction_error": null,
+      "max_reconstruction_error": null,
+      "anomalous_rows": 0,
+      "normal_rows": 1540,
+      "anomaly_rate_percent": 0.0,
+      "feature_count": 0,
+      "matched_features": 0,
+      "missing_features": 0,
+      "feature_coverage_percent": 0.0,
+      "top_anomalous_rows": []
+    },
+    "zero_day_details": [],
+    "results_preview": [
+      {
+        "flow_index": 19,
+        "attack_type": "WEBATTACK",
+        "attack_type_confidence": 0.9992,
+        "attack_type_status": "WEBATTACK",
+        "xgb_pred": "BOT",
+        "xgb_conf": 0.6179,
+        "lstm_pred": "WEBATTACK",
+        "lstm_conf": 0.9992,
+        "ensemble_pred": "WEBATTACK",
+        "ensemble_conf": 0.563,
+        "source_model": "ensemble"
+      },
+      {
+        "flow_index": 24,
+        "attack_type": "WEBATTACK",
+        "attack_type_confidence": 0.9999,
+        "attack_type_status": "WEBATTACK",
+        "xgb_pred": "BOT",
+        "xgb_conf": 0.6179,
+        "lstm_pred": "WEBATTACK",
+        "lstm_conf": 0.9999,
+        "ensemble_pred": "WEBATTACK",
+        "ensemble_conf": 0.5633,
+        "source_model": "ensemble"
+      },
+      {
+        "flow_index": 29,
+        "attack_type": "WEBATTACK",
+        "attack_type_confidence": 0.9998,
+        "attack_type_status": "WEBATTACK",
+        "xgb_pred": "BOT",
+        "xgb_conf": 0.6179,
+        "lstm_pred": "WEBATTACK",
+        "lstm_conf": 0.9998,
+        "ensemble_pred": "WEBATTACK",
+        "ensemble_conf": 0.5633,
+        "source_model": "ensemble"
+      },
+      {
+        "flow_index": 34,
+        "attack_type": "WEBATTACK",
+        "attack_type_confidence": 0.9991,
+        "attack_type_status": "WEBATTACK",
+        "xgb_pred": "BOT",
+        "xgb_conf": 0.6654,
+        "lstm_pred": "WEBATTACK",
+        "lstm_conf": 0.9991,
+        "ensemble_pred": "WEBATTACK",
+        "ensemble_conf": 0.4745,
+        "source_model": "ensemble"
+      },
+      {
+        "flow_index": 39,
+        "attack_type": "WEBATTACK",
+        "attack_type_confidence": 0.9903,
+        "attack_type_status": "WEBATTACK",
+        "xgb_pred": "BOT",
+        "xgb_conf": 0.6654,
+        "lstm_pred": "WEBATTACK",
+        "lstm_conf": 0.9903,
+        "ensemble_pred": "WEBATTACK",
+        "ensemble_conf": 0.4706,
+        "source_model": "ensemble"
+      },
+      {
+        "flow_index": 44,
+        "attack_type": "WEBATTACK",
+        "attack_type_confidence": 0.9695,
+        "attack_type_status": "WEBATTACK",
+        "xgb_pred": "BOT",
+        "xgb_conf": 0.6655,
+        "lstm_pred": "WEBATTACK",
+        "lstm_conf": 0.9695,
+        "ensemble_pred": "WEBATTACK",
+        "ensemble_conf": 0.4617,
+        "source_model": "ensemble"
+      },
+      {
+        "flow_index": 49,
+        "attack_type": "WEBATTACK",
+        "attack_type_confidence": 0.9992,
+        "attack_type_status": "WEBATTACK",
+        "xgb_pred": "BOT",
+        "xgb_conf": 0.6179,
+        "lstm_pred": "WEBATTACK",
+        "lstm_conf": 0.9992,
+        "ensemble_pred": "WEBATTACK",
+        "ensemble_conf": 0.563,
+        "source_model": "ensemble"
+      },
+      {
+        "flow_index": 54,
+        "attack_type": "WEBATTACK",
+        "attack_type_confidence": 0.9999,
+        "attack_type_status": "WEBATTACK",
+        "xgb_pred": "BOT",
+        "xgb_conf": 0.6179,
+        "lstm_pred": "WEBATTACK",
+        "lstm_conf": 0.9999,
+        "ensemble_pred": "WEBATTACK",
+        "ensemble_conf": 0.5633,
+        "source_model": "ensemble"
+      },
+      {
+        "flow_index": 59,
+        "attack_type": "WEBATTACK",
+        "attack_type_confidence": 0.9999,
+        "attack_type_status": "WEBATTACK",
+        "xgb_pred": "BOT",
+        "xgb_conf": 0.6179,
+        "lstm_pred": "WEBATTACK",
+        "lstm_conf": 0.9999,
+        "ensemble_pred": "WEBATTACK",
+        "ensemble_conf": 0.5633,
+        "source_model": "ensemble"
+      },
+      {
+        "flow_index": 64,
+        "attack_type": "WEBATTACK",
+        "attack_type_confidence": 0.9999,
+        "attack_type_status": "WEBATTACK",
+        "xgb_pred": "BOT",
+        "xgb_conf": 0.6179,
+        "lstm_pred": "WEBATTACK",
+        "lstm_conf": 0.9999,
+        "ensemble_pred": "WEBATTACK",
+        "ensemble_conf": 0.5633,
+        "source_model": "ensemble"
+      },
+      {
+        "flow_index": 69,
+        "attack_type": "WEBATTACK",
+        "attack_type_confidence": 0.9999,
+        "attack_type_status": "WEBATTACK",
+        "xgb_pred": "BOT",
+        "xgb_conf": 0.6179,
+        "lstm_pred": "WEBATTACK",
+        "lstm_conf": 0.9999,
+        "ensemble_pred": "WEBATTACK",
+        "ensemble_conf": 0.5633,
+        "source_model": "ensemble"
+      },
+      {
+        "flow_index": 74,
+        "attack_type": "WEBATTACK",
+        "attack_type_confidence": 0.9997,
+        "attack_type_status": "WEBATTACK",
+        "xgb_pred": "BOT",
+        "xgb_conf": 0.664,
+        "lstm_pred": "WEBATTACK",
+        "lstm_conf": 0.9997,
+        "ensemble_pred": "WEBATTACK",
+        "ensemble_conf": 0.4748,
+        "source_model": "ensemble"
+      },
+      {
+        "flow_index": 79,
+        "attack_type": "WEBATTACK",
+        "attack_type_confidence": 0.9953,
+        "attack_type_status": "WEBATTACK",
+        "xgb_pred": "BOT",
+        "xgb_conf": 0.664,
+        "lstm_pred": "WEBATTACK",
+        "lstm_conf": 0.9953,
+        "ensemble_pred": "WEBATTACK",
+        "ensemble_conf": 0.4728,
+        "source_model": "ensemble"
+      },
+      {
+        "flow_index": 84,
+        "attack_type": "WEBATTACK",
+        "attack_type_confidence": 0.9802,
+        "attack_type_status": "WEBATTACK",
+        "xgb_pred": "BOT",
+        "xgb_conf": 0.6672,
+        "lstm_pred": "WEBATTACK",
+        "lstm_conf": 0.9802,
+        "ensemble_pred": "WEBATTACK",
+        "ensemble_conf": 0.4662,
+        "source_model": "ensemble"
+      },
+      {
+        "flow_index": 89,
+        "attack_type": "WEBATTACK",
+        "attack_type_confidence": 0.9942,
+        "attack_type_status": "WEBATTACK",
+        "xgb_pred": "BOT",
+        "xgb_conf": 0.6179,
+        "lstm_pred": "WEBATTACK",
+        "lstm_conf": 0.9942,
+        "ensemble_pred": "WEBATTACK",
+        "ensemble_conf": 0.5607,
+        "source_model": "ensemble"
+      },
+      {
+        "flow_index": 94,
+        "attack_type": "WEBATTACK",
+        "attack_type_confidence": 0.9998,
+        "attack_type_status": "WEBATTACK",
+        "xgb_pred": "BOT",
+        "xgb_conf": 0.6179,
+        "lstm_pred": "WEBATTACK",
+        "lstm_conf": 0.9998,
+        "ensemble_pred": "WEBATTACK",
+        "ensemble_conf": 0.5633,
+        "source_model": "ensemble"
+      },
+      {
+        "flow_index": 99,
+        "attack_type": "WEBATTACK",
+        "attack_type_confidence": 0.9999,
+        "attack_type_status": "WEBATTACK",
+        "xgb_pred": "BOT",
+        "xgb_conf": 0.6179,
+        "lstm_pred": "WEBATTACK",
+        "lstm_conf": 0.9999,
+        "ensemble_pred": "WEBATTACK",
+        "ensemble_conf": 0.5633,
+        "source_model": "ensemble"
+      },
+      {
+        "flow_index": 104,
+        "attack_type": "WEBATTACK",
+        "attack_type_confidence": 0.9998,
+        "attack_type_status": "WEBATTACK",
+        "xgb_pred": "BOT",
+        "xgb_conf": 0.6179,
+        "lstm_pred": "WEBATTACK",
+        "lstm_conf": 0.9998,
+        "ensemble_pred": "WEBATTACK",
+        "ensemble_conf": 0.5633,
+        "source_model": "ensemble"
+      },
+      {
+        "flow_index": 109,
+        "attack_type": "WEBATTACK",
+        "attack_type_confidence": 0.9998,
+        "attack_type_status": "WEBATTACK",
+        "xgb_pred": "BOT",
+        "xgb_conf": 0.6179,
+        "lstm_pred": "WEBATTACK",
+        "lstm_conf": 0.9998,
+        "ensemble_pred": "WEBATTACK",
+        "ensemble_conf": 0.5633,
+        "source_model": "ensemble"
+      },
+      {
+        "flow_index": 114,
+        "attack_type": "WEBATTACK",
+        "attack_type_confidence": 0.9996,
+        "attack_type_status": "WEBATTACK",
+        "xgb_pred": "BOT",
+        "xgb_conf": 0.6688,
+        "lstm_pred": "WEBATTACK",
+        "lstm_conf": 0.9996,
+        "ensemble_pred": "WEBATTACK",
+        "ensemble_conf": 0.4752,
+        "source_model": "ensemble"
+      },
+      {
+        "flow_index": 119,
+        "attack_type": "WEBATTACK",
+        "attack_type_confidence": 0.9995,
+        "attack_type_status": "WEBATTACK",
+        "xgb_pred": "BRUTEFORCE",
+        "xgb_conf": 0.524,
+        "lstm_pred": "WEBATTACK",
+        "lstm_conf": 0.9995,
+        "ensemble_pred": "WEBATTACK",
+        "ensemble_conf": 0.5617,
+        "source_model": "ensemble"
+      },
+      {
+        "flow_index": 124,
+        "attack_type": "WEBATTACK",
+        "attack_type_confidence": 0.9954,
+        "attack_type_status": "WEBATTACK",
+        "xgb_pred": "BRUTEFORCE",
+        "xgb_conf": 0.5113,
+        "lstm_pred": "WEBATTACK",
+        "lstm_conf": 0.9954,
+        "ensemble_pred": "WEBATTACK",
+        "ensemble_conf": 0.5675,
+        "source_model": "ensemble"
+      },
+      {
+        "flow_index": 129,
+        "attack_type": "WEBATTACK",
+        "attack_type_confidence": 0.9874,
+        "attack_type_status": "WEBATTACK",
+        "xgb_pred": "BOT",
+        "xgb_conf": 0.6631,
+        "lstm_pred": "WEBATTACK",
+        "lstm_conf": 0.9874,
+        "ensemble_pred": "WEBATTACK",
+        "ensemble_conf": 0.4702,
+        "source_model": "ensemble"
+      },
+      {
+        "flow_index": 134,
+        "attack_type": "WEBATTACK",
+        "attack_type_confidence": 0.9813,
+        "attack_type_status": "WEBATTACK",
+        "xgb_pred": "BRUTEFORCE",
+        "xgb_conf": 0.5316,
+        "lstm_pred": "WEBATTACK",
+        "lstm_conf": 0.9813,
+        "ensemble_pred": "WEBATTACK",
+        "ensemble_conf": 0.5576,
+        "source_model": "ensemble"
+      },
+      {
+        "flow_index": 139,
+        "attack_type": "WEBATTACK",
+        "attack_type_confidence": 0.9792,
+        "attack_type_status": "WEBATTACK",
+        "xgb_pred": "BOT",
+        "xgb_conf": 0.664,
+        "lstm_pred": "WEBATTACK",
+        "lstm_conf": 0.9792,
+        "ensemble_pred": "WEBATTACK",
+        "ensemble_conf": 0.4656,
+        "source_model": "ensemble"
+      }
+    ],
+    "flow_metadata_preview": [
+      {
+        "Flow ID": "1.1.1.1-192.168.67.128-20000-21-6",
+        "Src IP": "1.1.1.1",
+        "Src Port": 20000,
+        "Dst IP": "192.168.67.128",
+        "Dst Port": 21,
+        "Protocol": 6,
+        "Timestamp": "29/12/2025 04:36:40 PM",
+        "Flow Duration": 851832,
+        "Label": "NeedManualLabel"
+      },
+      {
+        "Flow ID": "1.1.1.1-192.168.67.128-20001-21-6",
+        "Src IP": "1.1.1.1",
+        "Src Port": 20001,
+        "Dst IP": "192.168.67.128",
+        "Dst Port": 21,
+        "Protocol": 6,
+        "Timestamp": "29/12/2025 04:36:40 PM",
+        "Flow Duration": 871752,
+        "Label": "NeedManualLabel"
+      },
+      {
+        "Flow ID": "1.1.1.1-192.168.67.128-20002-21-6",
+        "Src IP": "1.1.1.1",
+        "Src Port": 20002,
+        "Dst IP": "192.168.67.128",
+        "Dst Port": 21,
+        "Protocol": 6,
+        "Timestamp": "29/12/2025 04:36:40 PM",
+        "Flow Duration": 904862,
+        "Label": "NeedManualLabel"
+      },
+      {
+        "Flow ID": "1.1.1.1-192.168.67.128-20005-21-6",
+        "Src IP": "1.1.1.1",
+        "Src Port": 20005,
+        "Dst IP": "192.168.67.128",
+        "Dst Port": 21,
+        "Protocol": 6,
+        "Timestamp": "29/12/2025 04:36:40 PM",
+        "Flow Duration": 831263,
+        "Label": "NeedManualLabel"
+      },
+      {
+        "Flow ID": "1.1.1.1-192.168.67.128-20006-21-6",
+        "Src IP": "1.1.1.1",
+        "Src Port": 20006,
+        "Dst IP": "192.168.67.128",
+        "Dst Port": 21,
+        "Protocol": 6,
+        "Timestamp": "29/12/2025 04:36:40 PM",
+        "Flow Duration": 864952,
+        "Label": "NeedManualLabel"
+      },
+      {
+        "Flow ID": "1.1.1.1-192.168.67.128-20003-21-6",
+        "Src IP": "1.1.1.1",
+        "Src Port": 20003,
+        "Dst IP": "192.168.67.128",
+        "Dst Port": 21,
+        "Protocol": 6,
+        "Timestamp": "29/12/2025 04:36:40 PM",
+        "Flow Duration": 1146663,
+        "Label": "NeedManualLabel"
+      },
+      {
+        "Flow ID": "1.1.1.1-192.168.67.128-20007-21-6",
+        "Src IP": "1.1.1.1",
+        "Src Port": 20007,
+        "Dst IP": "192.168.67.128",
+        "Dst Port": 21,
+        "Protocol": 6,
+        "Timestamp": "29/12/2025 04:36:40 PM",
+        "Flow Duration": 926256,
+        "Label": "NeedManualLabel"
+      },
+      {
+        "Flow ID": "1.1.1.1-192.168.67.128-20004-21-6",
+        "Src IP": "1.1.1.1",
+        "Src Port": 20004,
+        "Dst IP": "192.168.67.128",
+        "Dst Port": 21,
+        "Protocol": 6,
+        "Timestamp": "29/12/2025 04:36:40 PM",
+        "Flow Duration": 1140028,
+        "Label": "NeedManualLabel"
+      },
+      {
+        "Flow ID": "1.1.1.1-192.168.67.128-20010-21-6",
+        "Src IP": "1.1.1.1",
+        "Src Port": 20010,
+        "Dst IP": "192.168.67.128",
+        "Dst Port": 21,
+        "Protocol": 6,
+        "Timestamp": "29/12/2025 04:36:40 PM",
+        "Flow Duration": 844426,
+        "Label": "NeedManualLabel"
+      },
+      {
+        "Flow ID": "1.1.1.1-192.168.67.129-50000-3389-6",
+        "Src IP": "1.1.1.1",
+        "Src Port": 50000,
+        "Dst IP": "192.168.67.129",
+        "Dst Port": 3389,
+        "Protocol": 6,
+        "Timestamp": "29/12/2025 04:36:41 PM",
+        "Flow Duration": 3500,
+        "Label": "NeedManualLabel"
+      },
+      {
+        "Flow ID": "1.1.1.1-192.168.67.128-50001-80-6",
+        "Src IP": "1.1.1.1",
+        "Src Port": 50001,
+        "Dst IP": "192.168.67.128",
+        "Dst Port": 80,
+        "Protocol": 6,
+        "Timestamp": "29/12/2025 04:36:41 PM",
+        "Flow Duration": 3499,
+        "Label": "NeedManualLabel"
+      },
+      {
+        "Flow ID": "1.1.1.1-192.168.67.128-20011-21-6",
+        "Src IP": "1.1.1.1",
+        "Src Port": 20011,
+        "Dst IP": "192.168.67.128",
+        "Dst Port": 21,
+        "Protocol": 6,
+        "Timestamp": "29/12/2025 04:36:40 PM",
+        "Flow Duration": 916763,
+        "Label": "NeedManualLabel"
+      },
+      {
+        "Flow ID": "1.1.1.1-192.168.67.128-50002-3389-6",
+        "Src IP": "1.1.1.1",
+        "Src Port": 50002,
+        "Dst IP": "192.168.67.128",
+        "Dst Port": 3389,
+        "Protocol": 6,
+        "Timestamp": "29/12/2025 04:36:41 PM",
+        "Flow Duration": 3500,
+        "Label": "NeedManualLabel"
+      },
+      {
+        "Flow ID": "1.1.1.1-192.168.67.128-20008-21-6",
+        "Src IP": "1.1.1.1",
+        "Src Port": 20008,
+        "Dst IP": "192.168.67.128",
+        "Dst Port": 21,
+        "Protocol": 6,
+        "Timestamp": "29/12/2025 04:36:40 PM",
+        "Flow Duration": 1102629,
+        "Label": "NeedManualLabel"
+      },
+      {
+        "Flow ID": "1.1.1.1-192.168.67.128-50003-8080-6",
+        "Src IP": "1.1.1.1",
+        "Src Port": 50003,
+        "Dst IP": "192.168.67.128",
+        "Dst Port": 8080,
+        "Protocol": 6,
+        "Timestamp": "29/12/2025 04:36:41 PM",
+        "Flow Duration": 3500,
+        "Label": "NeedManualLabel"
+      },
+      {
+        "Flow ID": "1.1.1.1-192.168.67.128-20012-21-6",
+        "Src IP": "1.1.1.1",
+        "Src Port": 20012,
+        "Dst IP": "192.168.67.128",
+        "Dst Port": 21,
+        "Protocol": 6,
+        "Timestamp": "29/12/2025 04:36:40 PM",
+        "Flow Duration": 928962,
+        "Label": "NeedManualLabel"
+      },
+      {
+        "Flow ID": "1.1.1.1-192.168.67.128-20009-21-6",
+        "Src IP": "1.1.1.1",
+        "Src Port": 20009,
+        "Dst IP": "192.168.67.128",
+        "Dst Port": 21,
+        "Protocol": 6,
+        "Timestamp": "29/12/2025 04:36:40 PM",
+        "Flow Duration": 1117783,
+        "Label": "NeedManualLabel"
+      },
+      {
+        "Flow ID": "1.1.1.1-192.168.67.128-50004-3389-6",
+        "Src IP": "1.1.1.1",
+        "Src Port": 50004,
+        "Dst IP": "192.168.67.128",
+        "Dst Port": 3389,
+        "Protocol": 6,
+        "Timestamp": "29/12/2025 04:36:41 PM",
+        "Flow Duration": 3500,
+        "Label": "NeedManualLabel"
+      },
+      {
+        "Flow ID": "1.1.1.1-192.168.67.128-50005-3389-6",
+        "Src IP": "1.1.1.1",
+        "Src Port": 50005,
+        "Dst IP": "192.168.67.128",
+        "Dst Port": 3389,
+        "Protocol": 6,
+        "Timestamp": "29/12/2025 04:36:41 PM",
+        "Flow Duration": 3500,
+        "Label": "NeedManualLabel"
+      },
+      {
+        "Flow ID": "1.1.1.1-192.168.67.128-20015-21-6",
+        "Src IP": "1.1.1.1",
+        "Src Port": 20015,
+        "Dst IP": "192.168.67.128",
+        "Dst Port": 21,
+        "Protocol": 6,
+        "Timestamp": "29/12/2025 04:36:40 PM",
+        "Flow Duration": 839172,
+        "Label": "NeedManualLabel"
+      },
+      {
+        "Flow ID": "1.1.1.1-192.168.67.128-50006-445-6",
+        "Src IP": "1.1.1.1",
+        "Src Port": 50006,
+        "Dst IP": "192.168.67.128",
+        "Dst Port": 445,
+        "Protocol": 6,
+        "Timestamp": "29/12/2025 04:36:41 PM",
+        "Flow Duration": 3500,
+        "Label": "NeedManualLabel"
+      },
+      {
+        "Flow ID": "1.1.1.1-192.168.67.129-50007-445-6",
+        "Src IP": "1.1.1.1",
+        "Src Port": 50007,
+        "Dst IP": "192.168.67.129",
+        "Dst Port": 445,
+        "Protocol": 6,
+        "Timestamp": "29/12/2025 04:36:41 PM",
+        "Flow Duration": 3500,
+        "Label": "NeedManualLabel"
+      },
+      {
+        "Flow ID": "1.1.1.1-192.168.67.128-50008-22-6",
+        "Src IP": "1.1.1.1",
+        "Src Port": 50008,
+        "Dst IP": "192.168.67.128",
+        "Dst Port": 22,
+        "Protocol": 6,
+        "Timestamp": "29/12/2025 04:36:41 PM",
+        "Flow Duration": 3500,
+        "Label": "NeedManualLabel"
+      },
+      {
+        "Flow ID": "1.1.1.1-192.168.67.128-50009-22-6",
+        "Src IP": "1.1.1.1",
+        "Src Port": 50009,
+        "Dst IP": "192.168.67.128",
+        "Dst Port": 22,
+        "Protocol": 6,
+        "Timestamp": "29/12/2025 04:36:41 PM",
+        "Flow Duration": 3500,
+        "Label": "NeedManualLabel"
+      },
+      {
+        "Flow ID": "1.1.1.1-192.168.67.128-20016-21-6",
+        "Src IP": "1.1.1.1",
+        "Src Port": 20016,
+        "Dst IP": "192.168.67.128",
+        "Dst Port": 21,
+        "Protocol": 6,
+        "Timestamp": "29/12/2025 04:36:40 PM",
+        "Flow Duration": 905527,
+        "Label": "NeedManualLabel"
+      }
+    ]
+  },
+  "response_plan": [
+    {
+      "type": "block_ip",
+      "target": "192.168.67.128",
+      "description": "Block confirmed malicious source IP 192.168.67.128 after analyst validation",
+      "status": "Pending"
+    },
+    {
+      "type": "isolate_host",
+      "target": "prod-web-01",
+      "description": "Isolate prod-web-01 if compromise is confirmed or the service is business critical",
+      "status": "Pending"
+    }
+  ],
+  "investigation_summary": "Hybrid IDS escalated this event from webattack.pcap. Hybrid IDS classified the traffic as attack or packet rules produced many alerts. Binary decision: ATTACK. Zero-day decision: SKIPPED.",
+  "markdown_report": "# Hybrid IDS Escalation Report: INC-IDS-20260629-201608-160\n\n## Executive Summary\nThe Hybrid IDS forwarded a detection result from `webattack.pcap` to the SOAR Incident Response dashboard. The event was classified as **WEBATTACK (300 rows)** with **High** severity.\n\n## Detection Evidence\n- **Binary Decision**: `ATTACK`\n- **Multiclass Top Attack**: `WEBATTACK (300 rows)`\n- **Zero-Day Decision**: `SKIPPED`\n- **Zero-Day Anomalous Rows**: `0`\n- **Packet Rule Alerts**: `15158`\n- **Flows Analyzed**: `1540`\n\n## Original Flow Metadata Used by SOAR\n- **Source IP:** `1.1.1.1`\n- **Target IP:** `192.168.67.128`\n- **Source Port:** `20000`\n- **Target Port:** `21`\n- **Protocol:** `6`\n- **Packets:** `0`\n- **Bytes:** `0`\n- **Duration:** `851832`\n- **Label / Flow Finding:** `NeedManualLabel`\n- **Reconstruction Error:** `None`\n\n## Indicators\n- **Source IP**: `192.168.67.128`\n- **Target IP**: `192.168.67.128`\n- **Target Host**: `prod-web-01`\n- **MITRE Mapping**: `T1040 - Network Sniffing`\n\n## Recommended IR Workflow\n1. Validate the source IP and target host using firewall, endpoint, and application logs.\n2. Open a SOC ticket and assign an analyst for verification.\n3. If the activity is confirmed malicious, block the source IP and isolate the affected host.\n4. Preserve volatile evidence before destructive containment if the affected system is critical.\n"
+}

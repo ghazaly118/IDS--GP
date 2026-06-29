@@ -1,0 +1,38 @@
+{
+  "id": "INC-2026-101",
+  "timestamp": "2026-06-24T10:12:00-07:00",
+  "source_ip": "45.132.89.23",
+  "target_ip": "10.0.0.12",
+  "target_host": "db-srv-prod",
+  "attack_type": "SQL Injection / Exploit Attempt",
+  "severity": "High",
+  "cvss": 8.2,
+  "status": "Investigated",
+  "mitre": {
+    "id": "T1190",
+    "name": "Exploit Public-Facing Application",
+    "tactic": "Initial Access"
+  },
+  "traffic_stats": {
+    "packets": 124,
+    "bytes": 48200,
+    "duration_ms": 1250,
+    "protocol": "TCP",
+    "service": "postgresql"
+  },
+  "response_plan": [
+    {
+      "type": "block_ip",
+      "target": "45.132.89.23",
+      "description": "Block SQL exploit source IP on edge firewall",
+      "status": "Approved"
+    },
+    {
+      "type": "isolate_host",
+      "target": "db-srv-prod",
+      "description": "Isolate high-value database host to prevent lateral movement",
+      "status": "Pending"
+    }
+  ],
+  "investigation_summary": "Detection model identified structural anomalies in payload sizes and flow sequences on Postgres port 5432. Deep inspection revealed multiple 'UNION SELECT' expressions in packet sequences, matching SQL injection heuristics. Recommended network isolation and credential rotation."
+}

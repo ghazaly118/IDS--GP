@@ -1,0 +1,6 @@
+{
+  "name": "Incident Response & Intrusion Detection Agent",
+  "description": "An Autonomous Incident Response (IR) and Intrusion Detection System (IDS) dashboard with server-side Gemini threat analysis, live network flow visualizers, and simulated victim endpoint isolation capabilities.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

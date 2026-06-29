@@ -1,0 +1,196 @@
+============================================================
+HYBRID IDS + ZERO-DAY + SOAR — RUN COMMANDS (YOUR ACTUAL PATHS)
+Generated for: C:\Users\amoha\OneDrive\Desktop\gp\gp
+============================================================
+
+IMPORTANT NOTES:
+- All paths are already set to YOUR machine.
+- Python 3.12 venv is already built — DO NOT recreate it.
+- node_modules already installed — DO NOT run npm install again.
+- Run each terminal block in a SEPARATE PowerShell window.
+- Keep all three terminals open while using the system.
+
+
+============================================================
+FIRST TIME ONLY — ONE-TIME SETUP (already done, skip if .venv exists)
+============================================================
+
+If .venv is missing or broken, recreate it with Python 3.12:
+
+  cd "C:\Users\amoha\OneDrive\Desktop\gp\gp\hybrid_ids_share_with_keys"
+  py -3.12 -m venv .venv
+  Set-ExecutionPolicy -Scope Process -ExecutionPolicy RemoteSigned
+  .\.venv\Scripts\Activate.ps1
+  pip install -r requirements.txt
+
+NOTE: tensorflow requires Python 3.12 — do NOT use Python 3.14.
+
+
+============================================================
+TERMINAL 1 — HYBRID IDS BACKEND (port 8000)
+============================================================
+
+Open PowerShell and run:
+
+  cd "C:\Users\amoha\OneDrive\Desktop\gp\gp\hybrid_ids_share_with_keys"
+
+  $env:CICFLOWMETER_BIN="C:\Users\amoha\OneDrive\Desktop\gp\gp\cicflowmeter_custom\bin\CICFlowMeter.bat"
+
+  .\.venv\Scripts\python.exe -m uvicorn app.main:app --reload --port 8000
+
+Wait for:
+  INFO: Application startup complete.
+
+URL: http://127.0.0.1:8000
+Keep this terminal OPEN.
+
+
+============================================================
+TERMINAL 2 — HYBRID IDS STREAMLIT DASHBOARD (port 8501)
+============================================================
+
+Open a NEW PowerShell and run:
+
+  cd "C:\Users\amoha\OneDrive\Desktop\gp\gp\hybrid_ids_share_with_keys"
+
+  .\.venv\Scripts\python.exe -m streamlit run ui/streamlit_app.py
+
+Wait for:
+  Local URL: http://localhost:8501
+
+URL: http://localhost:8501
+Keep this terminal OPEN.
+
+
+============================================================
+TERMINAL 3 — SOAR BACKEND + REACT DASHBOARD (ports 8001 + 5173)
+============================================================
+
+Open a NEW PowerShell and run:
+
+  cd "C:\Users\amoha\OneDrive\Desktop\gp\gp\hybrid_ids_share_with_keys\incident-response-&-intrusion-detection-agent"
+
+  cmd /c "npm run dev"
+
+Wait for:
+  [API] INFO: Application startup complete.
+  [UI]  Local: http://localhost:5173/
+
+URLs:
+  SOAR API:    http://127.0.0.1:8001
+  SOAR React:  http://localhost:5173
+
+Keep this terminal OPEN.
+
+
+============================================================
+OPEN IN BROWSER
+============================================================
+
+  Hybrid IDS Dashboard:  http://localhost:8501
+  SOAR Dashboard:        http://localhost:5173
+
+
+============================================================
+DEMO FLOW
+============================================================
+
+1. Open http://localhost:8501
+2. Upload a PCAP / PCAPNG  OR  a CICFlowMeter CSV file
+3. Click: Analyze
+4. Pipeline runs:
+     - Binary Model  -> ATTACK or BENIGN
+     - If ATTACK: Multiclass Model + Zero-Day Model run
+     - If BENIGN:  Multiclass + Zero-Day skipped, safe
+5. If result is ATTACK -> click: Send to SOAR Incident Response
+6. Open http://localhost:5173
+7. Select the incident
+8. Optionally add analyst context:
+     - Victim Host / Endpoint
+     - Business Impact
+     - Server Application Role
+     - SOC Observables / Manual Logs
+9. Click: Run Autonomous AI Incident Responder
+10. SOAR generates:
+     - Incident ticket
+     - AI forensic report
+     - Investigation plan
+     - Containment plan
+     - Block / IP isolation recommendations
+
+
+============================================================
+LOGIC SUMMARY
+============================================================
+
+Binary = BENIGN
+  -> System safe
+  -> Multiclass skipped
+  -> Zero-Day autoencoder runs (anomaly detection only)
+  -> No SOAR handoff needed
+
+Binary = ATTACK
+  -> Multiclass runs (attack type classification)
+  -> Zero-Day skipped
+  -> Send to SOAR available
+
+
+============================================================
+COMMON ERRORS AND FIXES
+============================================================
+
+ERROR: running scripts is disabled
+FIX:
+  Set-ExecutionPolicy -Scope Process -ExecutionPolicy RemoteSigned
+
+ERROR: port 8000 already in use
+FIX:
+  netstat -ano | findstr :8000
+  taskkill /PID <PID> /F
+  OR use: uvicorn app.main:app --reload --port 8002
+
+ERROR: port 5173 already in use
+FIX:
+  Close old SOAR terminal
+  OR use: cmd /c "npm run dev -- --port 5174"
+
+ERROR: tensorflow not found / No matching distribution
+FIX:
+  Delete .venv and recreate with Python 3.12:
+  py -3.12 -m venv .venv
+  (Python 3.14 is NOT supported by tensorflow)
+
+ERROR: SOAR report not generated
+FIX:
+  1. Check .env exists in incident-response-&-intrusion-detection-agent\
+  2. GEMINI_API_KEY is valid
+  3. SOAR backend running on port 8001
+  4. Selected a real IDS incident (not empty)
+  5. Clicked "Run Autonomous AI Incident Responder"
+
+ERROR: CICFlowMeter not found
+FIX:
+  Test-Path "C:\Users\amoha\OneDrive\Desktop\gp\gp\cicflowmeter_custom\bin\CICFlowMeter.bat"
+  Should return True.
+  Then set:
+  $env:CICFLOWMETER_BIN="C:\Users\amoha\OneDrive\Desktop\gp\gp\cicflowmeter_custom\bin\CICFlowMeter.bat"
+
+
+============================================================
+QUICK COPY-PASTE (all three terminals)
+============================================================
+
+-- Terminal 1 --
+cd "C:\Users\amoha\OneDrive\Desktop\gp\gp\hybrid_ids_share_with_keys"
+$env:CICFLOWMETER_BIN="C:\Users\amoha\OneDrive\Desktop\gp\gp\cicflowmeter_custom\bin\CICFlowMeter.bat"
+.\.venv\Scripts\python.exe -m uvicorn app.main:app --reload --port 8000
+
+-- Terminal 2 --
+cd "C:\Users\amoha\OneDrive\Desktop\gp\gp\hybrid_ids_share_with_keys"
+.\.venv\Scripts\python.exe -m streamlit run ui/streamlit_app.py
+
+-- Terminal 3 --
+cd "C:\Users\amoha\OneDrive\Desktop\gp\gp\hybrid_ids_share_with_keys\incident-response-&-intrusion-detection-agent"
+cmd /c "npm run dev"
+
+============================================================

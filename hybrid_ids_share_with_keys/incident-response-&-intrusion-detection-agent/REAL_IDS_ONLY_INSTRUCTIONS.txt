@@ -1,0 +1,23 @@
+REAL IDS ONLY SOAR PATCH
+
+Copy these files into your Incident Response / SOAR project:
+
+1) Replace:
+   server.py
+
+2) Replace:
+   src/components/NetworkParser.tsx
+
+3) Clear old demo data after replacing server.py:
+   PowerShell from the SOAR project root:
+
+   Remove-Item .\data\incidents\*.json -Force -ErrorAction SilentlyContinue
+   Remove-Item .\data\reports\*.md -Force -ErrorAction SilentlyContinue
+   Clear-Content .\data\tickets.jsonl -ErrorAction SilentlyContinue
+   Clear-Content .\data\blocklist.txt -ErrorAction SilentlyContinue
+   Clear-Content .\data\isolated_hosts.txt -ErrorAction SilentlyContinue
+
+4) Restart SOAR backend and React UI.
+
+After this, the SOAR dashboard will not seed mock incidents and the left panel will not show quick-inject demo data.
+New incidents should come from the Hybrid IDS Streamlit button: Send to SOAR Incident Response.

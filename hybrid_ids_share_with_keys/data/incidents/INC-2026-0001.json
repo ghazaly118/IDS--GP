@@ -1,0 +1,40 @@
+{
+  "id": "INC-2026-0001",
+  "attack_type": "DNS Tunneling / Data Exfiltration",
+  "severity": "High",
+  "cvss": 8.5,
+  "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:C/C:H/I:N/A:N",
+  "mitre": {
+    "id": "T1071.004",
+    "name": "Application Layer Protocol: DNS Exfiltration",
+    "tactic": "Exfiltration"
+  },
+  "investigation_summary": "An ML IDS alert flagged DNS tunneling and data exfiltration from corp-laptop-12 (suspected IP 10.0.2.45) to an external Nameserver (198.51.100.42) over UDP/53. Forensic analysis confirms highly structured, non-cached DNS queries containing Base64/Hex encoded data within subdomains, indicating chunked exfiltration. Specifically, corporate VSCode configuration keys, likely containing sensitive credentials or API keys, have been identified as the exfiltrated data. The incident represents a severe breach of confidentiality on a critical user workstation.",
+  "response_plan": [
+    {
+      "type": "isolate_host",
+      "target": "corp-laptop-12",
+      "description": "Immediately disconnect corp-laptop-12 from the corporate network to prevent further data exfiltration and potential lateral movement.",
+      "status": "Pending"
+    },
+    {
+      "type": "block_ip",
+      "target": "198.51.100.42",
+      "description": "Implement firewall rules to block all inbound and outbound traffic to/from the external malicious IP at the network perimeter.",
+      "status": "Pending"
+    }
+  ],
+  "markdown_report": "# Incident Response Report: INC-2026-0001 - DNS Data Exfiltration\n\n**Date:** 2024-07-30\n**Incident ID:** INC-2026-0001\n**Lead Investigator:** IR-Agent (Gemini AI)\n\n## 1. Executive Summary\n\nA critical security incident involving active DNS tunneling and data exfiltration has been detected and confirmed on `corp-laptop-12`. Malicious software on the workstation is leveraging DNS queries to an external nameserver (`198.51.100.42`) to transfer sensitive corporate VSCode configuration keys, potentially containing credentials or API tokens, out of the network. This incident poses a High severity risk due to the confirmed loss of confidential data. Immediate containment actions are underway.\n\n## 2. Incident Details\n\n*   **Incident Type:** Data Exfiltration via DNS Tunneling\n*   **Detection Method:** ML IDS Alert (Confidence: 0.864)\n*   **Victim Host:** `corp-laptop-12` (Source IP: 10.0.2.45)\n*   **Victim Role:** User Workstation\n*   **Criticality:** Medium\n*   **Target Exfil IP:** `198.51.100.42` (External Nameserver)\n*   **Protocol/Port:** UDP/53\n*   **Exfiltration Volume:** 542 packets, 86400 bytes over 120.4 seconds\n\n## 3. Forensic Analysis Findings\n\n*   **Confirmed DNS Tunneling:** Network flow analysis revealed highly structured, non-cached outbound UDP requests on port 53. The high packet and byte count over a short duration are indicative of bulk data transfer.\n*   **Data Encoding:** Subdomains within the DNS queries contained Base64/Hex encoded metadata, a sophisticated technique for encapsulating and tunneling arbitrary data over a seemingly benign protocol.\n*   **Exfiltrated Data:** Specific identification of \"corporate VSCode config keys\" suggests the compromise and exfiltration of sensitive application configurations. These keys commonly store authentication tokens, API keys, or other confidential user/system data, indicating a high impact on confidentiality.\n*   **Source of Attack:** The exfiltration originates from a compromised user workstation, indicating potential prior infection or unauthorized access that enabled the malicious payload to run.\n\n## 4. Severity Assessment\n\n**CVSS v3.1 Base Score:** **8.5 (High)**\n**CVSS Vector:** `CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:C/C:H/I:N/A:N`\n\n*   **Attack Vector (AV:N):** The attack involves network communication from the compromised host to an external server.\n*   **Attack Complexity (AC:L):** Once the malicious software is established, the exfiltration mechanism is straightforward to execute.\n*   **Privileges Required (PR:L):** The exfiltration process itself requires low privileges on the compromised host, likely user-level access to read VSCode config files.\n*   **User Interaction (UI:N):** No user interaction is required for the ongoing data exfiltration once the system is compromised.\n*   **Scope (S:C):** Confidential data is moved outside the organizational security boundary, changing the security scope of the affected information.\n*   **Confidentiality (C:H):** High impact due to confirmed exfiltration of sensitive configuration keys, posing a significant risk of further compromise or intellectual property loss.\n*   **Integrity (I:N):** No direct impact on data integrity during this exfiltration event.\n*   **Availability (A:N):** No direct impact on system availability during this exfiltration event.\n\n## 5. MITRE ATT&CK Mapping\n\n*   **Tactic:** Exfiltration (TA0010)\n    *   **Technique:** Application Layer Protocol: DNS Exfiltration (T1071.004)\n        *   **Description:** Adversaries may tunnel data over DNS to evade detection and exfiltrate information. This technique uses standard DNS queries to encapsulate and transmit data by encoding it into subdomains.\n\n## 6. Immediate Response & Containment Actions\n\nThe following immediate actions have been recommended and are Pending:\n\n*   **Action 1: Isolate Host `corp-laptop-12`**\n    *   **Description:** Immediately disconnect `corp-laptop-12` from the corporate network (e.g., VLAN quarantine, port shutdown) to prevent further data exfiltration, lateral movement, or command and control communication.\n    *   **Status:** Pending\n*   **Action 2: Block Malicious IP `198.51.100.42`**\n    *   **Description:** Implement firewall rules to block all inbound and outbound traffic to/from `198.51.100.42` at the network perimeter to prevent any further communication with the exfiltration server.\n    *   **Status:** Pending\n\n## 7. Next Steps & Recommendations\n\n*   Perform a full forensic image and analysis of `corp-laptop-12` to identify the initial compromise vector, the specific malware payload, and the full extent of data accessed and exfiltrated. Determine if persistence mechanisms are in place.\n*   Identify all potentially compromised VSCode configuration keys (e.g., API keys, tokens, credentials) and assess the blast radius on associated systems or services. Initiate rotation of all identified sensitive credentials.\n*   Conduct a network-wide scan for similar Indicators of Compromise (IoCs), including unusual DNS traffic patterns, connections to `198.51.100.42`, or the presence of the identified malware.\n*   Enhance DNS monitoring capabilities with advanced analytics, focusing on entropy checks, query length anomalies, and frequency analysis to improve detection of future DNS tunneling attempts.\n*   Review and strengthen Endpoint Detection and Response (EDR) capabilities on all user workstations to prevent and detect initial compromise and subsequent malicious activities.",
+  "timestamp": "2026-06-25T15:37:14.548630+00:00",
+  "source_ip": "10.0.2.45",
+  "target_ip": "198.51.100.42",
+  "target_host": "corp-laptop-12",
+  "traffic_stats": {
+    "packets": 542,
+    "bytes": 86400,
+    "duration_ms": 120400,
+    "protocol": "UDP",
+    "service": "dns"
+  },
+  "status": "Investigated"
+}

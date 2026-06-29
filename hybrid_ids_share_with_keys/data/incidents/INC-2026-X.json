@@ -1,0 +1,34 @@
+{
+  "id": "INC-2026-X",
+  "attack_type": "Denial of Service (DDoS)",
+  "severity": "High",
+  "cvss": 7.5,
+  "cvss_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+  "mitre": {
+    "id": "T1498.002",
+    "name": "UDP Flood",
+    "tactic": "Impact"
+  },
+  "investigation_summary": "An ML IDS alert detected a UDP Flood (DDoS) originating from IP 185.220.101.5, identified as a public Tor exit node, targeting prod-web-01 (10.0.0.5) on port 80. The attack comprised 450,230 packets and 582,310,400 bytes over 15.2 seconds, causing massive ingress traffic and exceeding bandwidth thresholds on the Nginx HTTP listener. The use of UDP on port 80 (typically TCP for HTTP) is suspicious and indicative of a deliberate attempt to cause resource exhaustion or bypass stateless firewalls. The target 'prod-web-01' is a critical Public Web Gateway, making the service highly available.",
+  "response_plan": [
+    {
+      "type": "block_ip",
+      "target": "185.220.101.5",
+      "description": "Implement an immediate block on all incoming traffic from the identified attacker IP address at the perimeter firewall or network edge device to prevent further resource exhaustion.",
+      "status": "Pending"
+    }
+  ],
+  "markdown_report": "# Incident Report: INC-2026-X - DDoS Attack on prod-web-01\n\n## 1. Incident Overview\n*   **Incident ID:** INC-2026-X\n*   **Attack Type:** Denial of Service (DDoS) - UDP Flood\n*   **Severity:** High\n*   **Victim Hostname:** prod-web-01\n*   **Target IP:** 10.0.0.5\n*   **Attacker IP:** 185.220.101.5\n*   **Target Port:** 80\n*   **Protocol:** UDP\n*   **Flow Packets:** 450,230\n*   **Flow Bytes:** 582,310,400\n*   **Flow Duration:** 15.2 seconds\n*   **Detected By:** ML IDS Alert (Confidence: 0.985)\n\n## 2. Forensic Analysis\n\n### 2.1. Initial Observations\n*   An ML-driven Intrusion Detection System (IDS) alerted on a UDP Flood (DDoS) attack targeting `prod-web-01`.\n*   The attack originated from `185.220.101.5`, which resolved as a public Tor exit node, indicating an attempt at anonymity.\n*   High volume traffic (450,230 packets, 582,310,400 bytes) was observed over a short duration (15.2 seconds).\n*   Nginx connection logs on `prod-web-01` confirmed massive ingress traffic rates exceeding standard bandwidth thresholds on HTTP listener port 80.\n*   The attack utilized UDP protocol on port 80, which is highly unusual for HTTP services that primarily use TCP. This suggests a deliberate attempt to bypass stateful firewalls, exploit potential UDP-based services running on port 80, or simply to generate unstateful, high-volume traffic for resource exhaustion.\n\n### 2.2. System Context\n*   **Host Role:** Public Web Gateway\n*   **Criticality:** High\n*   **Impact:** The denial of service attack significantly impacted the availability of the public web gateway, disrupting legitimate user access and potentially other dependent services.\n\n### 2.3. Threat Actor Analysis\n*   The use of a Tor exit node suggests the attacker aims to obscure their origin. The motive appears to be service disruption or resource exhaustion rather than data exfiltration or system compromise, at least in the initial phase.\n\n## 3. CVSS v3 Severity Scoring\n\n*   **Vector:** CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H\n*   **Base Score:** 7.5 (High)\n\n**Breakdown:**\n*   **Attack Vector (AV): Network (N)** - The attack is exploitable over the network.\n*   **Attack Complexity (AC): Low (L)** - No specialized conditions or techniques are required; a simple UDP flood.\n*   **Privileges Required (PR): None (N)** - The attacker requires no privileges.\n*   **User Interaction (UI): None (N)** - No user interaction is required for the attack to succeed.\n*   **Scope (S): Unchanged (U)** - The vulnerability on the affected component does not affect components outside its security scope.\n*   **Confidentiality (C): None (N)** - There is no impact on the confidentiality of information.\n*   **Integrity (I): None (N)** - There is no impact on the integrity of data.\n*   **Availability (A): High (H)** - There is a complete loss of availability for the targeted service (web gateway).\n\n## 4. MITRE ATT&CK Mapping\n\n*   **Tactic:** Impact (TA0040)\n*   **Technique:** Network Denial of Service (T1498)\n    *   **Sub-Technique:** UDP Flood (T1498.002)\n\n## 5. Response Plan (Containment Actions)\n\nBased on the immediate threat and the nature of the attack, the following containment action is recommended:\n\n*   **Action Type:** Block IP\n*   **Target:** `185.220.101.5`\n*   **Description:** Implement an immediate block on all incoming traffic from the attacker IP address (`185.220.101.5`) at the perimeter firewall or a dedicated DDoS mitigation service to prevent further resource exhaustion on `prod-web-01`.\n*   **Status:** Pending\n\n### 5.1. Further Recommendations\n\n*   **Network Monitoring:** Enhance monitoring for unusual traffic patterns or spikes, particularly on critical public-facing infrastructure.\n*   **DDoS Mitigation Review:** Review and strengthen existing DDoS mitigation strategies, including rate-limiting, traffic scrubbing, and blackholing capabilities for all public-facing assets.\n*   **Protocol Hardening:** Investigate why UDP traffic on port 80 is being accepted or processed by the web gateway and implement stricter filtering if no legitimate UDP service is expected on that port.\n*   **Security Posture Review:** Conduct a broader review of the security posture for all public-facing web gateways.\n*   **Threat Intelligence Integration:** Consider integrating threat intelligence feeds to proactively block traffic from known malicious Tor exit nodes or other high-risk IPs, if business requirements allow.\n\n## 6. Conclusion\nThe `prod-web-01` host experienced a significant Denial of Service attack via a UDP flood, originating from a Tor exit node. The attack successfully impacted the availability of the critical Public Web Gateway. Immediate containment by blocking the source IP is crucial, followed by a comprehensive review of DDoS mitigation strategies and network hardening to prevent future occurrences.",
+  "timestamp": "2026-06-25T01:02:54.490514+00:00",
+  "source_ip": "185.220.101.5",
+  "target_ip": "10.0.0.5",
+  "target_host": "prod-web-01",
+  "traffic_stats": {
+    "packets": 450230,
+    "bytes": 582310400,
+    "duration_ms": 15200,
+    "protocol": "UDP",
+    "service": "http"
+  },
+  "status": "Investigated"
+}

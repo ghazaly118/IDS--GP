@@ -1,0 +1,356 @@
+HYBRID IDS + ZERO-DAY + SOAR INCIDENT RESPONSE
+FULL RUN COMMANDS - WINDOWS POWERSHELL
+============================================================
+
+IMPORTANT:
+- Use PowerShell, not CMD.
+- Replace <YOUR_USER> with your Windows username.
+- Keep the same folder names if possible.
+- If python is not recognized, use: py -3
+- If PowerShell blocks activation, run:
+  Set-ExecutionPolicy -Scope Process -ExecutionPolicy RemoteSigned
+
+
+============================================================
+0) REQUIRED SOFTWARE
+============================================================
+
+Install these first:
+
+1) Python 3.10 / 3.11 / 3.12
+2) Node.js + npm
+3) Java JDK
+4) CICFlowMeter custom build, if you want to upload PCAP/PCAPNG files
+
+If you will upload ready CICFlowMeter CSV files, CICFlowMeter is not required.
+If you will upload PCAP/PCAPNG files, CICFlowMeter is required.
+
+
+============================================================
+1) EXTRACT THE FILES
+============================================================
+
+Put these on Desktop:
+
+1) hybrid_ids_share_with_keys.zip
+2) cicflowmeter_custom.zip
+
+Extract them so the folders become:
+
+C:\Users\<YOUR_USER>\Desktop\hybrid_ids_share_with_keys
+C:\Users\<YOUR_USER>\Desktop\cicflowmeter_custom
+
+The CICFlowMeter path should look like this:
+
+C:\Users\<YOUR_USER>\Desktop\cicflowmeter_custom\bin\CICFlowMeter.bat
+
+
+============================================================
+2) CHECK CICFLOWMETER PATH
+============================================================
+
+Open PowerShell and run:
+
+Test-Path "C:\Users\<YOUR_USER>\Desktop\cicflowmeter_custom\bin\CICFlowMeter.bat"
+
+If it returns True, the path is correct.
+
+Set CICFlowMeter path for the current terminal:
+
+$env:CICFLOWMETER_BIN="C:\Users\<YOUR_USER>\Desktop\cicflowmeter_custom\bin\CICFlowMeter.bat"
+
+Optional: save it permanently for your Windows user:
+
+setx CICFLOWMETER_BIN "C:\Users\<YOUR_USER>\Desktop\cicflowmeter_custom\bin\CICFlowMeter.bat"
+
+After using setx, close PowerShell and open it again.
+
+
+============================================================
+3) INSTALL HYBRID IDS PYTHON REQUIREMENTS
+============================================================
+
+Open PowerShell in the main project folder:
+
+cd "C:\Users\<YOUR_USER>\Desktop\hybrid_ids_share_with_keys"
+
+Create virtual environment:
+
+python -m venv .venv
+
+If python is not recognized:
+
+py -3 -m venv .venv
+
+Activate virtual environment:
+
+.\.venv\Scripts\Activate.ps1
+
+If activation is blocked:
+
+Set-ExecutionPolicy -Scope Process -ExecutionPolicy RemoteSigned
+.\.venv\Scripts\Activate.ps1
+
+Install requirements:
+
+pip install -r requirements.txt
+
+
+============================================================
+4) RUN HYBRID IDS BACKEND
+============================================================
+
+Terminal 1:
+
+cd "C:\Users\<YOUR_USER>\Desktop\hybrid_ids_share_with_keys"
+.\.venv\Scripts\Activate.ps1
+
+$env:CICFLOWMETER_BIN="C:\Users\<YOUR_USER>\Desktop\cicflowmeter_custom\bin\CICFlowMeter.bat"
+
+uvicorn app.main:app --reload --port 8000
+
+Keep this terminal open.
+
+Hybrid IDS Backend URL:
+http://127.0.0.1:8000
+
+
+============================================================
+5) RUN HYBRID IDS STREAMLIT DASHBOARD
+============================================================
+
+Open a second PowerShell terminal:
+
+cd "C:\Users\<YOUR_USER>\Desktop\hybrid_ids_share_with_keys"
+.\.venv\Scripts\Activate.ps1
+
+streamlit run ui/streamlit_app.py
+
+Hybrid IDS Dashboard:
+http://localhost:8501
+
+
+============================================================
+6) INSTALL SOAR / INCIDENT RESPONSE REQUIREMENTS
+============================================================
+
+Open a third PowerShell terminal:
+
+cd "C:\Users\<YOUR_USER>\Desktop\hybrid_ids_share_with_keys\incident-response-&-intrusion-detection-agent"
+
+Install Python requirements:
+
+pip install -r requirements.txt
+
+Install React / Node dependencies:
+
+npm install
+
+
+============================================================
+7) CHECK SOAR .env FILE
+============================================================
+
+The .env file should be here:
+
+C:\Users\<YOUR_USER>\Desktop\hybrid_ids_share_with_keys\incident-response-&-intrusion-detection-agent\.env
+
+It should contain:
+
+GEMINI_API_KEY=your_key_here
+APP_URL=http://localhost:5173
+
+If the .env file is hidden, enable:
+File Explorer -> View -> Show -> Hidden items
+
+
+============================================================
+8) RUN SOAR BACKEND + REACT DASHBOARD
+============================================================
+
+From the SOAR folder:
+
+cd "C:\Users\<YOUR_USER>\Desktop\hybrid_ids_share_with_keys\incident-response-&-intrusion-detection-agent"
+
+npm run dev
+
+This should run:
+
+SOAR Backend:
+http://127.0.0.1:8001
+
+SOAR React Dashboard:
+http://localhost:5173
+
+Keep this terminal open.
+
+
+============================================================
+9) FULL DEMO FLOW
+============================================================
+
+1) Open Hybrid IDS Dashboard:
+   http://localhost:8501
+
+2) Upload one of these:
+   - PCAP / PCAPNG file
+   - CICFlowMeter CSV file
+
+3) Click:
+   Analyze
+
+4) The Hybrid IDS pipeline will run:
+
+   PCAP/CSV
+      -> CICFlowMeter if PCAP
+      -> Binary Model
+      -> If BENIGN: stop, safe, no zero-day
+      -> If ATTACK: Multiclass Model + Zero-Day Model
+      -> SOAR Handoff available
+
+5) If the result is ATTACK, click:
+   Send to SOAR Incident Response
+
+6) Open SOAR Dashboard:
+   http://localhost:5173
+
+7) Select the incident.
+
+8) Add optional analyst context if needed:
+   - Victim Host Endpoint
+   - Business Impact
+   - Server Application Role
+   - SOC Observables / Manual Logs
+
+9) Click:
+   Run Autonomous AI Incident Responder
+
+10) The SOAR dashboard should generate:
+    - Incident ticket
+    - AI forensic report
+    - Investigation plan
+    - Containment plan
+    - Block/IP isolation recommendations
+
+
+============================================================
+10) IMPORTANT LOGIC
+============================================================
+
+Current logic:
+
+Binary = BENIGN
+  -> System status safe
+  -> Multiclass skipped
+  -> Zero-Day skipped
+  -> No SOAR handoff needed
+
+Binary = ATTACK
+  -> Multiclass runs
+  -> Zero-Day runs
+  -> Send to SOAR Incident Response
+
+
+============================================================
+11) COMMON ERRORS AND FIXES
+============================================================
+
+ERROR:
+python was not found
+
+FIX:
+Use:
+py -3
+
+or use the full Python path, for example:
+& "C:\Users\<YOUR_USER>\AppData\Local\Programs\Python\Python312\python.exe" -m venv .venv
+
+
+ERROR:
+running scripts is disabled on this system
+
+FIX:
+Set-ExecutionPolicy -Scope Process -ExecutionPolicy RemoteSigned
+.\.venv\Scripts\Activate.ps1
+
+
+ERROR:
+CICFlowMeter path not found
+
+FIX:
+Check this path:
+Test-Path "C:\Users\<YOUR_USER>\Desktop\cicflowmeter_custom\bin\CICFlowMeter.bat"
+
+Then set:
+$env:CICFLOWMETER_BIN="C:\Users\<YOUR_USER>\Desktop\cicflowmeter_custom\bin\CICFlowMeter.bat"
+
+
+ERROR:
+Port 8000 already in use
+
+FIX:
+Close the old terminal or run:
+uvicorn app.main:app --reload --port 8002
+
+But if you change backend port, update Streamlit backend URL if needed.
+
+
+ERROR:
+Port 5173 already in use
+
+FIX:
+Close the old React terminal or run:
+npm run dev -- --port 5174
+
+
+ERROR:
+npm is not recognized
+
+FIX:
+Install Node.js, then close and reopen PowerShell.
+
+
+ERROR:
+SOAR report not generated
+
+FIX:
+Check:
+1) .env exists inside incident-response-&-intrusion-detection-agent
+2) GEMINI_API_KEY is correct
+3) SOAR backend is running on port 8001
+4) You selected a real IDS incident
+5) You clicked Run Autonomous AI Incident Responder
+
+
+============================================================
+12) QUICK START SUMMARY
+============================================================
+
+Terminal 1 - Hybrid IDS Backend:
+
+cd "C:\Users\<YOUR_USER>\Desktop\hybrid_ids_share_with_keys"
+.\.venv\Scripts\Activate.ps1
+$env:CICFLOWMETER_BIN="C:\Users\<YOUR_USER>\Desktop\cicflowmeter_custom\bin\CICFlowMeter.bat"
+uvicorn app.main:app --reload --port 8000
+
+
+Terminal 2 - Hybrid IDS Streamlit:
+
+cd "C:\Users\<YOUR_USER>\Desktop\hybrid_ids_share_with_keys"
+.\.venv\Scripts\Activate.ps1
+streamlit run ui/streamlit_app.py
+
+
+Terminal 3 - SOAR Dashboard:
+
+cd "C:\Users\<YOUR_USER>\Desktop\hybrid_ids_share_with_keys\incident-response-&-intrusion-detection-agent"
+npm run dev
+
+
+Open in browser:
+
+Hybrid IDS:
+http://localhost:8501
+
+SOAR:
+http://localhost:5173
